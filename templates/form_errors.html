@@ -1,0 +1,21 @@
+<!-- 필 드 오 류 와 넌 필 드 오 류 를 출 력 한 다. -->
+{% if form.errors %}
+<div class="alert alert-danger">
+    {% for field in form %}
+    <!-- 필 드 오 류 -->    
+    {% if field.errors %}
+    <div>
+        <strong>{{ field.label }}</strong>
+        {{ field.errors }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <!-- 넌 필 드 오 류 -->
+    {% for error in form.non_field_errors %}
+    <div>
+        <strong>{{ error }}</strong>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+    

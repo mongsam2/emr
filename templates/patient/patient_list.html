@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{% if patient_list %}
+    <ul>
+    {% for patient in patient_list %}
+        <li><a href="{% url 'patient:detail' patient.number %}">{{patient.name}} </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>환자가 없습니다.</p>
+{% endif %}
+{% endblock %}
