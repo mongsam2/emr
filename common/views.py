@@ -3,6 +3,9 @@ from django.shortcuts import render, redirect
 from common.forms import UserForm
 
 # Create your views here.
+def home(request):
+    return render(request, 'common/home.html')
+
 def start(request):
     return render(request, 'common/start.html')
 

@@ -1,11 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="container-fluid mt-4 mb-4">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- 첫 번째 검색창 -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="환자번호" aria-label="Search 1" aria-describedby="basic-addon1">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <!-- 두 번째 검색창 -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="환자이름" aria-label="Search 2" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% if patient_list %}
-    <ul>
-    {% for patient in patient_list %}
-        <li><a href="{% url 'patient:detail' patient.number %}">{{patient.name}} </a></li>
-    {% endfor %}
-    </ul>
+
+<div class="container-fluid">
+    <table class="table table-border table-primary table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Number</th>
+            <th scope="col">Name</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for patient in patient_list %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{patient.number}}</td>
+            <td>{{patient.name}}</td>
+            <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.number %}" role="button">조회</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% else %}
     <p>환자가 없습니다.</p>
 {% endif %}
