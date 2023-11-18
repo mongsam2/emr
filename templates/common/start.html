@@ -9,15 +9,23 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
     <!-- pybo CSS -->
     <!--<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
-    <title>EMR</title>
+    <title>Welcome!</title>
 </head>
 <body>
-{% include 'navbar.html' %}
 <!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 Start -->
-{% block content %}
-{% endblock %}
+<div class="d-grid gap-2 col-6 mx-auto">
+  <a class="btn btn-primary" role='button' href="{% url 'common:login' %}">로그인</a>
+  <a class="btn btn-secondary" role='button' href="{% url 'common:signup' %}">회원가입</a>
+</div>
 <!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 End -->
 <!-- Bootstrap JS -->
 <script src="{% static 'bootstrap.min.js' %}"></script>
 </body>
 </html>
+
+
+
+
+
+
+
