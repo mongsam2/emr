@@ -28,9 +28,9 @@
 {% if patient_list %}
 
 <div class="container-fluid">
-    <table class="table table-border table-primary table-striped">
+    <table class="table table-border table-Secondary table-striped">
         <thead>
-        <tr>
+        <tr class="table-dark">
             <th scope="col">#</th>
             <th scope="col">Number</th>
             <th scope="col">Name</th>
@@ -40,7 +40,7 @@
         <tbody>
         {% for patient in patient_list %}
         <tr>
-            <th scope="row">1</th>
+            <th scope="row">{{forloop.counter}}</th>
             <td>{{patient.number}}</td>
             <td>{{patient.name}}</td>
             <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.number %}" role="button">조회</a></td>
@@ -48,6 +48,42 @@
         {% endfor %}
         </tbody>
     </table>
+    <!--페이징처리-->
+    <ul class="pagination justify-content-center">
+        {% if patient_list.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{patient_list.previous_page_number}}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이 전</a>
+        </li>
+        {% endif %}
+        <!-- 페 이 지 리 스 트 -->
+        {% for page_number in patient_list.paginator.page_range %}
+        {% if page_number >= patient_list.number|add:-5 and page_number <= patient_list.number|add:5 %}
+        {% if page_number == patient_list.number %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endfor %} 
+        <!-- 다 음 페 이 지 -->
+        {% if patient_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ patient_list.next_page_number }}">다 음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다 음</a>
+        </li>
+        {% endif %}     
+    </ul>
 </div>
 
 {% else %}
