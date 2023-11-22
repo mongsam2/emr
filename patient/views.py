@@ -28,3 +28,8 @@ def patient_add(request):
         form = PatientForm()
     context = {'form':form}
     return render(request, 'patient/patient_add.html', context)
+
+def exercise(request, patient_number):
+    patient = get_object_or_404(Patient, pk=patient_number)
+    context = {'patient':patient}
+    return render(request, 'patient/exercise.html', context)

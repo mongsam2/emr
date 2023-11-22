@@ -43,7 +43,7 @@
     <div class="col-md-3">
       <div class="card bg-info mb-3 mt-3 ml-3" style="max-width: 18rem;">
         <div class="card-header">운동처방</div>
-        <img src="{% static '운동치료.jpg' %}" class="card-img-top">
+        <a href="{% url 'patient:exercise' patient.number %}"><img src="{% static '운동치료.jpg' %}" class="card-img-top"></a>
         <div class="card-body">
         </div>
       </div>
