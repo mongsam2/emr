@@ -1,18 +1,10 @@
 {% extends "base.html" %}
+{% load patient_filter %}
 {% block content %}
 <div class="container-fluid mt-4 mb-4">
     <div class="row">
         <div class="col-md-3">
             <a href="{% url 'patient:patient_add' %}" class="btn btn-primary">환자추가</a>
-        </div>
-        <div class="col-md-3">
-            <!-- 첫 번째 검색창 -->
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="환자번호" aria-label="Search 1" aria-describedby="basic-addon1">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Search</button>
-                </div>
-            </div>
         </div>
         <div class="col-md-3">
             <!-- 두 번째 검색창 -->
@@ -33,17 +25,20 @@
         <tr class="table-dark">
             <th scope="col">#</th>
             <th scope="col">이 름</th>
-            <th scope="col">나 이</th>
             <th scope="col">성 별</th>
+            <th scope="col">생년월일</th>
             <th scope="col">id</th>
+            <th scope="col">+</th>
         </tr>
         </thead>
         <tbody>
         {% for patient in patient_list %}
         <tr>
-            <th scope="row">{{forloop.counter}}</th>
-            <td>{{patient.id}}</td>
+            <th scope="row">{{patient_list.paginator.count|sub:patient_list.start_index|sub:forloop.counter|add:1}}</th>
             <td>{{patient.name}}</td>
+            <td>{{patient.back_resident|back}}</td>
+            <td>{{patient.front_resident|birth}}</td>
+            <td>{{patient.id|id_cut}}</td>
             <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">조회</a></td>
         </tr>
         {% endfor %}
