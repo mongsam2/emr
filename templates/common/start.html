@@ -10,12 +10,28 @@
     <!-- pybo CSS -->
     <!--<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
     <title>Welcome!</title>
+
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+    </style>
 </head>
 <body>
 <!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 Start -->
-<div class="d-grid gap-2 col-6 mx-auto">
-  <a class="btn btn-primary" role='button' href="{% url 'common:login' %}">로그인</a>
-  <a class="btn btn-secondary" role='button' href="{% url 'common:signup' %}">회원가입</a>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h2>Login</h2>
+      <a class="btn btn-primary" role='button' href="{% url 'common:login' %}">로그인</a>
+      <br>
+      <br>
+      <a class="btn btn-secondary" role='button' href="{% url 'common:signup' %}">회원가입</a>
+    </div>
+  </div>
 </div>
 <!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 End -->
 <!-- Bootstrap JS -->
