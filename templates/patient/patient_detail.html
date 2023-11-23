@@ -1,110 +1,130 @@
 {% extends "base.html" %}
+{% load patient_filter %}
 {% load static %}
 
 {% block content %}
-<div class="container-fluid text-center">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
-      <div class="card bg-primary mb-3 mt-3 ml-3" style="max-width: 18rem;">
-        <div class="card-header">진료</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card bg-primary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
-        <div class="card-header">진료기록</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card bg-primary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
-        <div class="card-header">처방기록</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
+    <div class="col-md-9">
+      <div class="container-fluid text-center">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card bg-primary mb-3 mt-3 ml-3" style="max-width: 18rem;">
+              <div class="card-header">진료</div>
+              <div class="card-body">
+                <h5 class="card-title">Primary card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
       
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-3">
-      <div class="card bg-info mb-3 mt-3 ml-3" style="max-width: 18rem;">
-        <div class="card-header">운동처방</div>
-        <a href="{% url 'patient:exercise' patient.id %}"><img src="{% static '운동치료.jpg' %}" class="card-img-top"></a>
-        <div class="card-body">
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card bg-info mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
-        <div class="card-header">기능평가</div>
-        <img src="{% static '기능평가.jpg' %}" class="card-img-top">
-        <div class="card-body">
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card bg-info mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
-        <div class="card-header">재활정보</div>
-        <img src="{% static '재활정보.jpg' %}" class="card-img-top">
-        <div class="card-body">
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
+          <div class="col-md-4">
+            <div class="card bg-primary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
+              <div class="card-header">진료기록</div>
+              <div class="card-body">
+                <h5 class="card-title">Primary card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
       
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-3">
-      <div class="card bg-secondary mb-3 mt-3 ml-3" style="max-width: 18rem;">
-        <div class="card-header">운동처방</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div class="col-md-4">
+            <div class="card bg-primary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
+              <div class="card-header">처방기록</div>
+              <div class="card-body">
+                <h5 class="card-title">Primary card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card bg-secondary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
-        <div class="card-header">기능평가</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="card bg-secondary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
-        <div class="card-header">재활정보</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
       
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card bg-info mb-3 mt-3 ml-3" style="max-width: 18rem;">
+              <div class="card-header">운동처방</div>
+              <a href="{% url 'patient:exercise' patient.id %}"><img src="{% static '운동치료.jpg' %}" class="card-img-top"></a>
+              <div class="card-body">
+              </div>
+            </div>
+          </div>
+      
+          <div class="col-md-4">
+            <div class="card bg-info mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
+              <div class="card-header">기능평가</div>
+              <img src="{% static '기능평가.jpg' %}" class="card-img-top">
+              <div class="card-body">
+              </div>
+            </div>
+          </div>
+      
+          <div class="col-md-4">
+            <div class="card bg-info mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
+              <div class="card-header">재활정보</div>
+              <img src="{% static '재활정보.jpg' %}" class="card-img-top">
+              <div class="card-body">
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card bg-secondary mb-3 mt-3 ml-3" style="max-width: 18rem;">
+              <div class="card-header">운동처방</div>
+              <div class="card-body">
+                <h5 class="card-title">Primary card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+      
+          <div class="col-md-4">
+            <div class="card bg-secondary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
+              <div class="card-header">기능평가</div>
+              <div class="card-body">
+                <h5 class="card-title">Primary card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+          </div>
+      
+          <div class="col-md-4">
+            <div class="card bg-secondary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
+              <div class="card-header">재활정보</div>
+              <div class="card-body">
+                <h5 class="card-title">Primary card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+          <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-4">{{patient.name}}</span>
+        </a>
+        <hr>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{patient.front_resident|birth2}}</li>
+          <li class="list-group-item">{{patient.back_resident|back2}}</li>
+          <li class="list-group-item">{{patient.phone}}</li>
+          <li class="list-group-item">{{patient.id|id_cut}}</li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+          <ul class="dropdown-menu dropdown-menu">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
+        </div>
+    </div>
     </div>
   </div>
 </div>

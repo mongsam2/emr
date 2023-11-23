@@ -16,8 +16,22 @@ def back(value):
     return ans
 
 @register.filter
+def back2(value):
+    ans=''
+    if int(value)%2==0:
+        ans = '여성'
+    else:
+        ans = '남성'
+    return ans
+
+@register.filter
 def birth(value):
     birth = value[:4]+'.'+value[4:6]+'.'+value[6:]
+    return birth
+
+@register.filter
+def birth2(value):
+    birth = value[:4]+'년 '+value[4:6]+'월 '+value[6:]+'일'
     return birth
 
 @register.filter
