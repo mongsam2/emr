@@ -32,18 +32,19 @@
         <thead>
         <tr class="table-dark">
             <th scope="col">#</th>
-            <th scope="col">Number</th>
-            <th scope="col">Name</th>
-            <th scope="col"></th>
+            <th scope="col">이 름</th>
+            <th scope="col">나 이</th>
+            <th scope="col">성 별</th>
+            <th scope="col">id</th>
         </tr>
         </thead>
         <tbody>
         {% for patient in patient_list %}
         <tr>
             <th scope="row">{{forloop.counter}}</th>
-            <td>{{patient.number}}</td>
+            <td>{{patient.id}}</td>
             <td>{{patient.name}}</td>
-            <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.number %}" role="button">조회</a></td>
+            <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">조회</a></td>
         </tr>
         {% endfor %}
         </tbody>
