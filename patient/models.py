@@ -18,6 +18,7 @@ class Patient2(models.Model):
     front_resident = models.CharField(max_length=8)
     back_resident = models.CharField(max_length=1)
     phone = models.CharField(max_length=30)
+    memo = models.TextField(default='memo')
 
 class ExercisePart(models.Model):
     part = models.CharField(primary_key=True, max_length=20)

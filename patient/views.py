@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Patient, Patient2
-from .forms import PatientForm, Patient2Form
+from .forms import PatientForm, PatientAddForm
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -19,13 +19,13 @@ def detail(request, patient_id):
 
 def patient_add(request):
     if request.method =='POST': # 저장하기 버튼을 눌렀을 경우
-        form = Patient2Form(request.POST) # 입력정보가 저장되어있는 폼
+        form = PatientAddForm(request.POST) # 입력정보가 저장되어있는 폼
         if form.is_valid():
             question = form.save(commit=False)
             question.save()
             return redirect('patient:index')
     else: #url로 접근할 경우 GET 방식으로 접근
-        form = PatientForm()
+        form = PatientAddForm()
     context = {'form':form}
     return render(request, 'patient/patient_add.html', context)
 
