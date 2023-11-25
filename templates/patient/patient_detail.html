@@ -109,7 +109,7 @@
         </a>
         <hr>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{patient.front_resident|birth2}}</li>
+          <li class="list-group-item">{{patient.front_resident|birth2:patient.back_resident}}</li>
           <li class="list-group-item">{{patient.back_resident|back2}}</li>
           <li class="list-group-item">{{patient.phone}}</li>
           <li class="list-group-item">{{patient.id|id_cut}}</li>

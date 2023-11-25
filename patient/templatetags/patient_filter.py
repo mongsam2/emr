@@ -25,13 +25,21 @@ def back2(value):
     return ans
 
 @register.filter
-def birth(value):
-    birth = value[:4]+'.'+value[4:6]+'.'+value[6:]
+def birth(value, back):
+    if back=='3' or back=='4':
+        year = '20'+value[:2]
+    else:
+        year = '19'+value[:2]
+    birth = year+'.'+value[2:4]+'.'+value[4:]
     return birth
 
 @register.filter
-def birth2(value):
-    birth = value[:4]+'년 '+value[4:6]+'월 '+value[6:]+'일'
+def birth2(value, back):
+    if back=='3' or back=='4':
+        year = '20'+value[:2]
+    else:
+        year = '19'+value[:2]
+    birth = year+'년 '+value[2:4]+'월 '+value[4:]+'일'
     return birth
 
 @register.filter

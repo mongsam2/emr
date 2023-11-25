@@ -15,7 +15,7 @@ class Patient(models.Model):
 class Patient2(models.Model):
     id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     name = models.CharField(max_length=10)
-    front_resident = models.CharField(max_length=8)
+    front_resident = models.CharField(max_length=6)
     back_resident = models.CharField(max_length=1)
     phone = models.CharField(max_length=30)
     memo = models.TextField(default='memo')

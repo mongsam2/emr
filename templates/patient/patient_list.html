@@ -37,7 +37,7 @@
             <th scope="row">{{patient_list.paginator.count|sub:patient_list.start_index|sub:forloop.counter|add:1}}</th>
             <td>{{patient.name}}</td>
             <td>{{patient.back_resident|back}}</td>
-            <td>{{patient.front_resident|birth}}</td>
+            <td>{{patient.front_resident|birth:patient.back_resident}}</td>
             <td>{{patient.id|id_cut}}</td>
             <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">조회</a></td>
         </tr>
