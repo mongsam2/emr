@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebars.css' %}">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
     <!-- pybo CSS -->
     <!--<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
     <title>EMR</title>
+
 </head>
 <body>
 {% include 'navbar.html' %}
@@ -18,6 +21,10 @@
 {% endblock %}
 <!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 End -->
 <!-- Bootstrap JS -->
+<script src="{% static 'popper.min.js' %}"></script>
+<script src="{% static 'sidebars.js' %}"></script>
 <script src="{% static 'bootstrap.min.js' %}"></script>
+<script src="{% static 'bootstrap.bundle.js' %}"></script>
+<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
