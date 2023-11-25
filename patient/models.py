@@ -26,11 +26,10 @@ class ExercisePart(models.Model):
 class ExerciseType(models.Model):
     type = models.CharField(primary_key=True, max_length=20)
 
-class Exercise(models.Model):
+class Exercise(models.Model): # 운동 설명영상 링크 저장
     name = models.CharField(primary_key=True, max_length=30)
     part = models.ForeignKey(ExercisePart, on_delete=models.CASCADE)
     type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
-
 class ExerciseList(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
