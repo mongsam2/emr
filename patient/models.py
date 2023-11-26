@@ -22,6 +22,7 @@ class Patient2(models.Model):
 
 class ExercisePart(models.Model):
     part = models.CharField(primary_key=True, max_length=20)
+    type = models.CharField(max_length=8, default='신전')
 
 class ExerciseType(models.Model):
     type = models.CharField(primary_key=True, max_length=20)
@@ -30,14 +31,15 @@ class Exercise(models.Model): # 운동 설명영상 링크 저장
     name = models.CharField(primary_key=True, max_length=30)
     part = models.ForeignKey(ExercisePart, on_delete=models.CASCADE)
     type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
+    link = models.URLField(default='https://www.iipamaster.com/prod/prodView/1026')
 
 class ExerciseList(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
-    count = models.IntegerField()
-    set = models.IntegerField()
+    count = models.IntegerField(default=0)
+    set = models.IntegerField(default=1)
     time = models.IntegerField(default=0)
     weight = models.IntegerField(default=0)
 
