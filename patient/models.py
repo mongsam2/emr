@@ -20,20 +20,8 @@ class Patient2(models.Model):
     phone = models.CharField(max_length=30)
     memo = models.TextField(default='memo')
 
-class ExercisePart(models.Model):
-    part = models.CharField(primary_key=True, max_length=20)
-    type = models.CharField(max_length=8, default='신전')
 
-class ExerciseType(models.Model):
-    type = models.CharField(primary_key=True, max_length=20)
-
-class Exercise(models.Model): # 운동 설명영상 링크 저장
-    name = models.CharField(primary_key=True, max_length=30)
-    part = models.ForeignKey(ExercisePart, on_delete=models.CASCADE)
-    type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
-    link = models.URLField(default='https://www.iipamaster.com/prod/prodView/1026')
-
-class ExerciseList(models.Model):
+'''class ExerciseList(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
@@ -41,5 +29,89 @@ class ExerciseList(models.Model):
     count = models.IntegerField(default=0)
     set = models.IntegerField(default=1)
     time = models.IntegerField(default=0)
-    weight = models.IntegerField(default=0)
+    weight = models.IntegerField(default=0)'''
 
+#------------------ 부위 별 테이블 -----------------------------------------------------------------
+
+'''class Neck(models.Model):
+    motion = models.CharField(primary_key=True, max_length=8)
+    arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+
+class Trunk(models.Model):
+    motion = models.CharField(primary_key=True, max_length=8)
+    arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+
+class Shoulder(models.Model):
+    motion = models.CharField(primary_key=True, max_length=8)
+    arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+
+class Elbow(models.Model):
+    motion = models.CharField(primary_key=True, max_length=8)
+    arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+
+class Wrist(models.Model):
+    motion = models.CharField(primary_key=True, max_length=8)
+    arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+
+class Hip(models.Model):
+    motion = models.CharField(primary_key=True, max_length=8)
+    arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+
+class Knee(models.Model):
+    motion = models.CharField(primary_key=True, max_length=8)
+    arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+
+class Ankle(models.Model):
+    code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
+    patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
+    data = models.DateField(default=timezone.now)
+    motion = models.CharField(max_length=8)
+    arom = models.IntegerField(default=0)
+    other_arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+    other_prom = models.IntegerField(default=0)'''
+
+#-------------- 운동 종류 ---------------------------------------------------
+
+class ExerciseType(models.Model):
+    type = models.CharField(primary_key=True, max_length=20)
+
+class Part(models.Model):
+    part = models.CharField(primary_key=True, max_length=10)
+
+class Motion(models.Model):
+    motion = models.CharField(primary_key=True, max_length=8)
+
+class Exercise(models.Model):
+    name = models.CharField(primary_key=True, max_length=30)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE)
+    link = models.URLField(default='https://blog.naver.com/smile86/221055278905')
+
+class Rom(models.Model):
+    code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    motion = models.ForeignKey(Motion, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
+    arom = models.IntegerField(default=0)
+    other_arom = models.IntegerField(default=0)
+    prom = models.IntegerField(default=0)
+    other_prom = models.IntegerField(default=0)
+
+class ExerciseList(models.Model):
+    code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
+    count = models.IntegerField(default=0)
+    set = models.IntegerField(default=1)
+    time = models.IntegerField(default=0)
+    weight = models.IntegerField(default=0)

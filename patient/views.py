@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Patient, Patient2
+from .models import *
 from .forms import PatientForm, PatientAddForm
 from django.core.paginator import Paginator
 
@@ -33,3 +33,14 @@ def exercise(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
     context = {'patient':patient}
     return render(request, 'patient/exercise.html', context)
+
+def exercise_add(request, part, type):
+    part = get_object_or_404(Part, pk=part)
+    type = get_object_or_404(ExerciseType, pk=type)
+    context = {'part':part, 'type':type}
+    return render(request, 'patient/exercise_add.html', context)
+
+def rom(request, patient_id):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    context = {'patient':patient}
+    return render(request, 'patient/rom.html', context)
