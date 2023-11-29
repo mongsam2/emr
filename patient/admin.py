@@ -9,6 +9,8 @@ admin.site.register(Patient, PatientAdmin)
 
 class Patient2Admin(admin.ModelAdmin):
     search_fields = ['name']
+    list_display = ('name', 'id', 'front_resident', 'back_resident', 'phone')
+
 admin.site.register(Patient2, Patient2Admin)
 
 admin.site.register(ExerciseType)
@@ -25,6 +27,7 @@ admin.site.register(Rom, RomAdmin)
 
 class ExerciseListAdmin(admin.ModelAdmin):
     search_fields = ['patient', 'date']
+    list_display = ('date', 'patient', 'exercise')
 admin.site.register(ExerciseList, ExerciseListAdmin)
 
 

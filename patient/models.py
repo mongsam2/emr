@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.utils import timezone
+from .templatetags.patient_filter import back
 
 # Create your models here.
 class Patient(models.Model):
@@ -19,6 +20,9 @@ class Patient2(models.Model):
     back_resident = models.CharField(max_length=1)
     phone = models.CharField(max_length=30)
     memo = models.TextField(default='memo')
+
+    def __str__(self):
+        return self.name + ' ' + self.front_resident +' ' + back(self.back_resident)
 
 
 '''class ExerciseList(models.Model):

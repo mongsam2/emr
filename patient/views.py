@@ -29,15 +29,29 @@ def patient_add(request):
     context = {'form':form}
     return render(request, 'patient/patient_add.html', context)
 
+def patient_modify(request, patient_id):
+    patient = get_object_or_404(Patient2, pk = patient_id)
+    if request.method == 'POST':
+        form = PatientAddForm(request.POST, instance=patient)
+        if form.is_valid():
+            patient = form.save(commit=False)
+            patient.save()
+            return redirect('patient:detail', patient_id = patient.id)
+    else:
+        form = PatientAddForm(instance=patient)
+    context = {'form':form}
+    return render(request, 'patient/patient_add.html', context)
 def exercise(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
     context = {'patient':patient}
     return render(request, 'patient/exercise.html', context)
 
-def exercise_add(request, part, type):
+def exercise_add(request, patient_id, part, type):
+    patient = get_object_or_404(Patient2, pk=patient_id)
     part = get_object_or_404(Part, pk=part)
     type = get_object_or_404(ExerciseType, pk=type)
-    context = {'part':part, 'type':type}
+    exercise_list = Exercise.objects.filter(part='목', type='스트레칭')
+    context = {'patient':patient, 'part':part, 'type':type, 'exercise_list':exercise_list}
     return render(request, 'patient/exercise_add.html', context)
 
 def rom(request, patient_id):

@@ -105,8 +105,8 @@
     <div class="col-md-3">
       <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
           <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-          <span class="fs-4">{{patient.name}}</span>
-        </a>
+          <span class="fs-4">{{patient.name}}
+          <a href="{% url 'patient:patient_modify' patient.id %}" class="btn  btn-sm btn-outline-secondary">수정</a></span>
         <hr>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">{{patient.front_resident|birth2:patient.back_resident}}</li>

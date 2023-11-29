@@ -16,9 +16,8 @@ class PatientForm(forms.ModelForm):
 class Patient2Form(forms.ModelForm):
     class Meta:
         model = Patient2
-        fields = ['id', 'name', 'front_resident', 'back_resident', 'phone']
+        fields = ['name', 'front_resident', 'back_resident', 'phone']
         labels = {
-            'id':'환자id',
             'name':'환자이름',
             'front_resident':'주민번호 앞자리',
             'back_resident':'주민번호 뒷자리',
@@ -28,9 +27,8 @@ class Patient2Form(forms.ModelForm):
 class PatientAddForm(forms.ModelForm):
     class Meta:
         model = Patient2
-        fields = ['id', 'name', 'front_resident', 'back_resident', 'phone', 'memo']
+        fields = ['name', 'front_resident', 'back_resident', 'phone', 'memo']
         labels = {
-            'id':'환자id',
             'name':'환자이름',
             'front_resident':'주민번호 앞자리',
             'back_resident':'주민번호 뒷자리',

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
         <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
         <span class="fs-4">운동목록</span>
@@ -11,43 +11,37 @@
         <ul class="nav nav-pills flex-column mb-auto text-center">
           <li>
             <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              경추
+              목
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="{% url ''}">전굴</a></li>
-              <li><a class="dropdown-item" href="#">후굴</a></li>
-              <li><a class="dropdown-item" href="#">좌굴</a></li>
-              <li><a class="dropdown-item" href="#">우굴</a></li>
-              <li><a class="dropdown-item" href="#">좌회전</a></li>
-              <li><a class="dropdown-item" href="#">우회전</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='목' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='목' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='목' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='목' type='근력 운동' %}">근력 운동</a></li>
             </ul>
           </li>
           <br>
           <li>
             <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              흉/요추
+              허리
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">전굴</a></li>
-              <li><a class="dropdown-item" href="#">후굴</a></li>
-              <li><a class="dropdown-item" href="#">좌굴</a></li>
-              <li><a class="dropdown-item" href="#">우굴</a></li>
-              <li><a class="dropdown-item" href="#">좌회전</a></li>
-              <li><a class="dropdown-item" href="#">우회전</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='허리' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='허리' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='허리' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='허리' type='근력 운동' %}">근력 운동</a></li>
             </ul>
           </li>
           <br>
           <li>
             <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              어깨/견갑대
+              어깨
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">외전</a></li>
-              <li><a class="dropdown-item" href="#">내전</a></li>
-              <li><a class="dropdown-item" href="#">내회전</a></li>
-              <li><a class="dropdown-item" href="#">외회전</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='어깨' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='어깨' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='어깨' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='어깨' type='근력 운동' %}">근력 운동</a></li>
             </ul>
           </li>
           <br>
@@ -56,10 +50,10 @@
               팔꿈치
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">내회전</a></li>
-              <li><a class="dropdown-item" href="#">외회전</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='팔꿈치' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='팔꿈치' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='팔꿈치' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='팔꿈치' type='근력 운동' %}">근력 운동</a></li>
             </ul>
           </li>
           <br>
@@ -68,10 +62,10 @@
               손목
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">요사위</a></li>
-              <li><a class="dropdown-item" href="#">척사위</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='손목' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='손목' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='손목' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='손목' type='근력 운동' %}">근력 운동</a></li>
             </ul>
           </li>
           <br>
@@ -80,12 +74,10 @@
               고관절
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">외전</a></li>
-              <li><a class="dropdown-item" href="#">내전</a></li>
-              <li><a class="dropdown-item" href="#">내회전</a></li>
-              <li><a class="dropdown-item" href="#">외회전</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='고관절' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='고관절' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='고관절' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='고관절' type='근력 운동' %}">근력 운동</a></li>
             </ul>
           </li>
           <br>
@@ -94,8 +86,10 @@
               무릎
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='무릎' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='무릎' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='무릎' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='무릎' type='근력 운동' %}">근력 운동</a></li>
             </ul>
           </li>
           <br>
@@ -104,10 +98,10 @@
               발목
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">외반</a></li>
-              <li><a class="dropdown-item" href="#">내반</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='발목' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='발목' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='발목' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='발목' type='근력 운동' %}">근력 운동</a></li>
             </ul>
           </li>
           <br>
@@ -116,8 +110,22 @@
     </div>
     </div>
 
-    <div class="col-md-5">
-      <h1>폼 출력 페이지</h1>
+    <div class="col-md-6">
+      <h2>운동 처방을 추가하세요</h2>
+      <div class="row">
+        {% for exercise in exercise_list %}
+        <div class="col-4">
+          
+          <div class="card mb-3 mt-3 ml-3" style="max-width: 18rem;">
+            <div class="card-header">{{exercise.name}} </div>
+            <div class="card-body">
+              <h5 class="card-title">Primary card title</h5>
+              <p class="card-text">Some quick example</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
 
     <div class="col-md-3">
@@ -137,6 +145,32 @@
           <hr>
       </div>
     </div>
+  </div>
+  <div class="row">
+    <table class="table table-border table-Secondary table-striped">
+      <thead>
+      <tr class="table-dark">
+          <th scope="col">#</th>
+          <th scope="col">운동 이름</th>
+          <th scope="col">부위</th>
+          <th scope="col">유형</th>
+          <th scope="col">상태</th>
+          <th scope="col">날짜</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for patient in patient_list %}
+      <tr>
+          <th scope="row">{{patient_list.paginator.count|sub:patient_list.start_index|sub:forloop.counter|add:1}}</th>
+          <td>{{patient.name}}</td>
+          <td>{{patient.back_resident|back}}</td>
+          <td>{{patient.front_resident|birth:patient.back_resident}}</td>
+          <td>{{patient.id|id_cut}}</td>
+          <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">조회</a></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 {% endblock %}
