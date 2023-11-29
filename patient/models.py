@@ -119,3 +119,4 @@ class ExerciseList(models.Model):
     set = models.IntegerField(default=1)
     time = models.IntegerField(default=0)
     weight = models.IntegerField(default=0)
+    done = models.BooleanField(default=False)

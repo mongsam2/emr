@@ -43,15 +43,17 @@ def patient_modify(request, patient_id):
     return render(request, 'patient/patient_add.html', context)
 def exercise(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
-    context = {'patient':patient}
+    exercise_list = ExerciseList.objects.filter(patient=patient_id)
+    context = {'patient':patient, 'exercise_list':exercise_list}
     return render(request, 'patient/exercise.html', context)
 
 def exercise_add(request, patient_id, part, type):
     patient = get_object_or_404(Patient2, pk=patient_id)
     part = get_object_or_404(Part, pk=part)
     type = get_object_or_404(ExerciseType, pk=type)
-    exercise_list = Exercise.objects.filter(part='목', type='스트레칭')
-    context = {'patient':patient, 'part':part, 'type':type, 'exercise_list':exercise_list}
+    exercises = Exercise.objects.filter(part='목', type='스트레칭')
+    exercise_list = ExerciseList.objects.filter(patient=patient_id)
+    context = {'patient':patient, 'part':part, 'type':type, 'exercises':exercises, 'exercise_list':exercise_list}
     return render(request, 'patient/exercise_add.html', context)
 
 def rom(request, patient_id):
