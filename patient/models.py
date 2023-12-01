@@ -22,7 +22,7 @@ class Patient2(models.Model):
     memo = models.TextField(default='memo')
 
     def __str__(self):
-        return self.name + ' ' + self.front_resident +' ' + back(self.back_resident)
+        return self.name + ' ' + self.front_resident +' ' + back(self.back_resident) + ' ' + self.id[:2]
 
 
 '''class ExerciseList(models.Model):
@@ -89,6 +89,9 @@ class ExerciseType(models.Model):
 
 class Part(models.Model):
     part = models.CharField(primary_key=True, max_length=10)
+
+    def __str__(self):
+        return self.part
 
 class Motion(models.Model):
     motion = models.CharField(primary_key=True, max_length=8)

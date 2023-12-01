@@ -51,7 +51,7 @@ def exercise_add(request, patient_id, part, type):
     patient = get_object_or_404(Patient2, pk=patient_id)
     part = get_object_or_404(Part, pk=part)
     type = get_object_or_404(ExerciseType, pk=type)
-    exercises = Exercise.objects.filter(part='목', type='스트레칭')
+    exercises = Exercise.objects.filter(part=part, type=type)
     exercise_list = ExerciseList.objects.filter(patient=patient_id)
     context = {'patient':patient, 'part':part, 'type':type, 'exercises':exercises, 'exercise_list':exercise_list}
     return render(request, 'patient/exercise_add.html', context)
