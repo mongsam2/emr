@@ -11,5 +11,6 @@ urlpatterns = [
     path('<str:patient_id>/exercise/', views.exercise, name='exercise'),
     path('<str:patient_id>/<str:part>/<str:type>/', views.exercise_add, name='exercise_add'),
     path('<str:patient_id>/rom/', views.rom, name='rom'),
+    path('<str:patient_id>/<str:part>/<str:type>/<str:exercise>/', views.exercise_form, name='exercise_form')
     
 ]

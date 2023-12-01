@@ -1,5 +1,5 @@
 from django import forms
-from patient.models import Patient2
+from patient.models import *
 
 class PatientForm(forms.ModelForm):
     class Meta:
@@ -35,3 +35,8 @@ class PatientAddForm(forms.ModelForm):
             'phone':'전화번호',
             'memo':'환자메모'
         }
+
+class ExerciseAddForm(forms.ModelForm):
+    class Meta:
+        model = ExerciseList
+        fields = ['date', 'set', 'count', 'time', 'weight']

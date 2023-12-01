@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
-from .forms import PatientForm, PatientAddForm
+from .forms import *
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -55,6 +55,23 @@ def exercise_add(request, patient_id, part, type):
     exercise_list = ExerciseList.objects.filter(patient=patient_id)
     context = {'patient':patient, 'part':part, 'type':type, 'exercises':exercises, 'exercise_list':exercise_list}
     return render(request, 'patient/exercise_add.html', context)
+
+def exercise_form(request, patient_id, part, type, exercise):
+    patient = get_object_or_404(Patient2, pk = patient_id)
+    exercise = get_object_or_404(Exercise, pk=exercise)
+
+    if request.method == 'POST':
+        form = ExerciseAddForm(request.POST)
+        if form.is_valid():
+            exercise_list = form.save(commit=False)
+            exercise_list.exercise = exercise
+            exercise_list.patient = patient
+            exercise_list.save()
+            return redirect('patient:exercise_add', patient_id=patient_id, part=part, type=type)
+    else:
+        form = ExerciseAddForm()
+    context={'patient':patient, 'exercise':exercise, 'form':form}
+    return render(request, 'patient/exercise_form.html', context)
 
 def rom(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)

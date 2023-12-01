@@ -100,7 +100,6 @@
     </div>
 
     <div class="col-md-6">
-      <h2>운동 처방을 추가하세요</h2>
       <div class="row">
         {% for exercise in exercises %}
         <div class="col-4">
@@ -108,27 +107,10 @@
           <div class="card mb-3 mt-3 ml-3" style="max-width: 18rem;">
             <div class="card-header">{{exercise.name}}</div>
             <div class="card-body">
-              <a href="#"><img src="{% static '운동치료.jpg' %}" class="card-img-top"></a>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{exercise.name|id_url}}">
-                Launch demo modal
-              </button>
-              <div class="modal fade" id="exampleModal{{exercise.name|id_url}}" tabindex="-1" aria-labelledby="exampleModalLabel{{exercise.name|id_url}}" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel{{exercise.name|id_url}}">{{exercise.name}}</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      {{exercise.name}}
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <img src="{% static '운동치료.jpg' %}" class="card-img-top">
+              <a class="btn btn-primary" href="{% url 'patient:exercise_form' patient_id=patient.id part=exercise.part.part type=exercise.type.type exercise=exercise.name %}" role="button">
+                리스트에 추가
+              </a>
             </div>
           </div>
         </div>
