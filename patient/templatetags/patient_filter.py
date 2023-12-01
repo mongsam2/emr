@@ -1,4 +1,5 @@
 from django import template
+from django.utils.text import slugify
 
 register = template.Library()
 
@@ -45,3 +46,8 @@ def birth2(value, back):
 @register.filter
 def id_cut(value):
     return value[:8]
+
+@register.filter
+def id_url(value):
+    ans = value.replace(' ', '-')
+    return ans
