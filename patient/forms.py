@@ -39,4 +39,6 @@ class PatientAddForm(forms.ModelForm):
 class ExerciseAddForm(forms.ModelForm):
     class Meta:
         model = ExerciseList
-        fields = ['date', 'set', 'count', 'time', 'weight']
+        fields = ['date', 'set', 'count', 'time', 'weight', 'done']
+
+    

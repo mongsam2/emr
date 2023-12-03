@@ -59,7 +59,7 @@ def exercise_add(request, patient_id, part, type):
 def exercise_form(request, patient_id, part, type, exercise):
     patient = get_object_or_404(Patient2, pk = patient_id)
     exercise = get_object_or_404(Exercise, pk=exercise)
-
+    exercise_list = ExerciseList.objects.filter(patient=patient_id)
     if request.method == 'POST':
         form = ExerciseAddForm(request.POST)
         if form.is_valid():
@@ -69,8 +69,16 @@ def exercise_form(request, patient_id, part, type, exercise):
             exercise_list.save()
             return redirect('patient:exercise_add', patient_id=patient_id, part=part, type=type)
     else:
-        form = ExerciseAddForm()
-    context={'patient':patient, 'exercise':exercise, 'form':form}
+        '''initial_values = {
+            'date': ExerciseList._meta.get_field('date').default,
+            'set': ExerciseList._meta.get_field('set').default,
+            'count': ExerciseList._meta.get_field('count').default,
+            'time': ExerciseList._meta.get_field('time').default,
+            'weight': ExerciseList._meta.get_field('weight').default,
+        }'''
+        form = ExerciseAddForm(instance=ExerciseList())
+
+    context={'patient':patient, 'exercise':exercise, 'form':form, 'exercise_list':exercise_list}
     return render(request, 'patient/exercise_form.html', context)
 
 def rom(request, patient_id):

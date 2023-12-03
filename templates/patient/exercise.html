@@ -10,7 +10,7 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto text-center">
           <li>
-            <a href="#" class="nav-link text-danger align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link text-primary align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
               목/허리
             </a>
             <ul class="dropdown-menu text-small shadow">
@@ -100,7 +100,6 @@
     </div>
 
     <div class="col-md-5">
-      <h2>운동 처방을 추가하세요</h2>
     </div>
 
     <div class="col-md-3">
@@ -108,7 +107,7 @@
         <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
             <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
             <span class="fs-4">{{patient.name}}</span>
-          </a>
+            <a href="{% url 'patient:detail' patient.id %}" class="btn  btn-sm btn-outline-secondary">환자 홈</a></span>
           <hr>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">{{patient.front_resident|birth2:patient.back_resident}}</li>
@@ -127,10 +126,10 @@
       <tr class="table-dark">
           <th scope="col">#</th>
           <th scope="col">운동 이름</th>
+          <th scope="col">날짜</th>
+          <th scope="col">상태</th>
           <th scope="col">부위</th>
           <th scope="col">유형</th>
-          <th scope="col">상태</th>
-          <th scope="col">날짜</th>
           <th scope="col">+</th>
       </tr>
       </thead>
@@ -139,10 +138,11 @@
       <tr>
           <th scope="row">{{forloop.counter}}</th>
           <td>{{exercise.exercise.name}}</td>
+          <td>{{exercise.date}}</td>
+          {% if exercise.done %}<td> <button type="button" class="btn btn-success">완료</button></td>
+          {% else %}<td><button type="button" class="btn btn-outline-secondary">수행 전</button></td>{% endif %}
           <td>{{exercise.exercise.part.part}}</td>
           <td>{{exercise.exercise.type.type}}</td>
-          <td>{% if exercise.done %} 완료 {% else %} 수행 전 {% endif %}</td>
-          <td>{{exercise.date}}</td>
           <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">상세</a></td>
       </tr>
       {% endfor %}

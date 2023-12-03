@@ -1,11 +1,233 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load patient_filter %}
 {% block content %}
+{% load static %}
 <div class="container-fluid">
-    <h5 class="my-3 border-bottom pb-2">환자정보입력</h5>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+        <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-4">운동목록</span>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto text-center">
+          <li>
+            <a href="#" class="nav-link text-primary align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              목/허리
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='목-허리' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='목-허리' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='목-허리' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='목-허리' type='근력 운동' %}">근력 운동</a></li>
+            </ul>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              가슴/어깨
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='가슴-어깨' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='가슴-어깨' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='가슴-어깨' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='가슴-어깨' type='근력 운동' %}">근력 운동</a></li>
+            </ul>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              등/견갑대
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='등-견갑대' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='등-견갑대' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='등-견갑대' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='등-견갑대' type='근력 운동' %}">근력 운동</a></li>
+            </ul>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              상완/전완
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='상완-전완' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='상완-전완' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='상완-전완' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='상완-전완' type='근력 운동' %}">근력 운동</a></li>
+            </ul>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              대퇴사두/햄스트링
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='대퇴사두-햄스트링' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='대퇴사두-햄스트링' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='대퇴사두-햄스트링' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='대퇴사두-햄스트링' type='근력 운동' %}">근력 운동</a></li>
+            </ul>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              둔근/종아리
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='둔근-종아리' type='스트레칭' %}">스트레칭</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='둔근-종아리' type='가동성 운동' %}">가동성 운동</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='둔근-종아리' type='소도구' %}">소도구</a></li>
+              <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='둔근-종아리' type='근력 운동' %}">근력 운동</a></li>
+            </ul>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              전신/유산소
+            </a>
+          <ul class="dropdown-menu text-small shadow">
+            <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='전신-유산소' type='스트레칭' %}">스트레칭</a></li>
+            <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='전신-유산소' type='가동성 운동' %}">가동성 운동</a></li>
+            <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='전신-유산소' type='소도구' %}">소도구</a></li>
+            <li><a class="dropdown-item" href="{% url 'patient:exercise_add' patient_id=patient.id part='전신-유산소' type='근력 운동' %}">근력 운동</a></li>
+          </ul>
+        </li>
+      <br>
+      </ul>
+      <hr>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <br>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">저장</button>
+      {% csrf_token %}
+      {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+        {% for field in form %}
+        {% if field.errors %}
+        <div>
+          <strong>{{ field.label }}</strong>
+          {{ field.errors }}
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="row">
+        <h4>{{exercise.name}}</h4>
+        <a href="{{exercise.link}}">{{exercise.link}}</a>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text"> 환자 이름 </span>
+            <input class="form-control" type="text" value={{patient.name}} readonly>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">운동 날짜</span>
+            <input class="form-control" name="date" type="date" value="{{form.date.value}}">
+          </div>
+      </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text">SET</span>
+            <input class="form-control" name="set" type="number" min="0" value="{{form.set.value}}">
+            <span class="input-group-text">세트</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="input-group">
+            <span class="input-group-text">COUNT</span>
+            <input class="form-control" name="count" type="number" min="0" value="{{form.count.value}}">
+            <span class="input-group-text">회</span>
+            <span class="input-group-text" id="basic-addon1">x</span>
+            <span class="input-group-text">WEIGHT</span>
+            <input class="form-control" name="weight" min="0" value="{{form.weight.value}}">
+            <span class="input-group-text">kg</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text">TIME</span>
+            <input class="form-control" name="time" type="number" min="0" value="{{form.time.value}}">
+            <span class="input-group-text">초</span>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-7">
+          <input class="btn-check" type="checkbox" name="done" {% if form.done.value %}checked{% endif %} id="btn-check-outlined" autocomplete="off">
+          <label class="btn btn-outline-success btn-lg" for="btn-check-outlined">운동완료</label>
+        </div>
+      </div>
+      <br>      
+      <button type="submit" class="btn btn-primary">확인</button>      
     </form>
+  </div>
+
+    <div class="col-md-3">
+      <div class="col-md-3">
+        <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+            <span class="fs-4">{{patient.name}}</span>
+            <a href="{% url 'patient:detail' patient.id %}" class="btn  btn-sm btn-outline-secondary">환자 홈</a></span>
+          <hr>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{patient.front_resident|birth2:patient.back_resident}}</li>
+            <li class="list-group-item">{{patient.back_resident|back2}}</li>
+            <li class="list-group-item">{{patient.phone}}</li>
+            <li class="list-group-item">{{patient.id|id_cut}}</li>
+            <li class="list-group-item">{{patient.memo}}</li>
+          </ul>
+          <hr>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-border table-Secondary table-striped">
+      <thead>
+      <tr class="table-dark">
+          <th scope="col">#</th>
+          <th scope="col">운동 이름</th>
+          <th scope="col">날짜</th>
+          <th scope="col">상태</th>
+          <th scope="col">부위</th>
+          <th scope="col">유형</th>
+          <th scope="col">+</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for exercise in exercise_list %}
+      <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{exercise.exercise.name}}</td>
+          <td>{{exercise.date}}</td>
+          {% if exercise.done %}<td> <button type="button" class="btn btn-success">완료</button></td>
+          {% else %}<td><button type="button" class="btn btn-outline-secondary">수행 전</button></td>{% endif %}
+          <td>{{exercise.exercise.part.part}}</td>
+          <td>{{exercise.exercise.type.type}}</td>
+          <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">상세</a></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
