@@ -3,112 +3,58 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
         <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-        <span class="fs-4">운동목록</span>
+        <span class="fs-4">가동범위검사</span>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto text-center">
           <li>
-            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="{% url 'patient:rom_form' patient_id=patient.id part='경추' %}" class="nav-link align-items-center text-decoration-none">
               경추
             </a>
-            <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">전굴</a></li>
-              <li><a class="dropdown-item" href="#">후굴</a></li>
-              <li><a class="dropdown-item" href="#">좌굴</a></li>
-              <li><a class="dropdown-item" href="#">우굴</a></li>
-              <li><a class="dropdown-item" href="#">좌회전</a></li>
-              <li><a class="dropdown-item" href="#">우회전</a></li>
-            </ul>
           </li>
           <br>
           <li>
-            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link align-items-center text-decoration-none">
               흉요추
             </a>
-            <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">전굴</a></li>
-              <li><a class="dropdown-item" href="#">후굴</a></li>
-              <li><a class="dropdown-item" href="#">좌굴</a></li>
-              <li><a class="dropdown-item" href="#">우굴</a></li>
-              <li><a class="dropdown-item" href="#">좌회전</a></li>
-              <li><a class="dropdown-item" href="#">우회전</a></li>
-            </ul>
           </li>
           <br>
           <li>
-            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              어깨/견갑대
+            <a href="#" class="nav-link align-items-center text-decoration-none">
+              어깨
             </a>
-            <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">외전</a></li>
-              <li><a class="dropdown-item" href="#">내전</a></li>
-              <li><a class="dropdown-item" href="#">내회전</a></li>
-              <li><a class="dropdown-item" href="#">외회전</a></li>
-            </ul>
           </li>
           <br>
           <li>
-            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link align-items-center text-decoration-none">
               팔꿈치
             </a>
-            <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">내회전</a></li>
-              <li><a class="dropdown-item" href="#">외회전</a></li>
-            </ul>
           </li>
           <br>
           <li>
-            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link align-items-center text-decoration-none">
               손목
             </a>
-            <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">요사위</a></li>
-              <li><a class="dropdown-item" href="#">척사위</a></li>
-            </ul>
           </li>
           <br>
           <li>
-            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link align-items-center text-decoration-none">
               고관절
             </a>
-            <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">외전</a></li>
-              <li><a class="dropdown-item" href="#">내전</a></li>
-              <li><a class="dropdown-item" href="#">내회전</a></li>
-              <li><a class="dropdown-item" href="#">외회전</a></li>
-            </ul>
           </li>
           <br>
           <li>
-            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link align-items-center text-decoration-none">
               무릎
             </a>
-            <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-            </ul>
           </li>
           <br>
           <li>
-            <a href="#" class="nav-link align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="nav-link align-items-center text-decoration-none">
               발목
             </a>
-            <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">굴곡</a></li>
-              <li><a class="dropdown-item" href="#">신전</a></li>
-              <li><a class="dropdown-item" href="#">외반</a></li>
-              <li><a class="dropdown-item" href="#">내반</a></li>
-            </ul>
           </li>
           <br>
         </ul>
@@ -116,8 +62,7 @@
     </div>
     </div>
 
-    <div class="col-md-5">
-      <h2>관절평가를 추가하세요</h2>
+    <div class="col-md-6">
     </div>
 
     <div class="col-md-3">
@@ -125,6 +70,7 @@
         <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
             <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
             <span class="fs-4">{{patient.name}}</span>
+            <a href="{% url 'patient:detail' patient.id %}" class="btn  btn-sm btn-outline-secondary">환자 홈</a></span>
           </a>
           <hr>
           <ul class="list-group list-group-flush">

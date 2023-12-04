@@ -69,13 +69,6 @@ def exercise_form(request, patient_id, part, type, exercise):
             exercise_list.save()
             return redirect('patient:exercise_add', patient_id=patient_id, part=part, type=type)
     else:
-        '''initial_values = {
-            'date': ExerciseList._meta.get_field('date').default,
-            'set': ExerciseList._meta.get_field('set').default,
-            'count': ExerciseList._meta.get_field('count').default,
-            'time': ExerciseList._meta.get_field('time').default,
-            'weight': ExerciseList._meta.get_field('weight').default,
-        }'''
         form = ExerciseAddForm(instance=ExerciseList())
 
     context={'patient':patient, 'exercise':exercise, 'form':form, 'exercise_list':exercise_list}
@@ -85,3 +78,23 @@ def rom(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
     context = {'patient':patient}
     return render(request, 'patient/rom.html', context)
+
+def rom_form(request, patient_id, part):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    if part=='경추':
+        part = get_object_or_404(Part, pk=part)
+        if request.method == 'POST':
+            form = NeckTrunkForm(request.POST)
+            if form.is_valid():
+                rom = form.save(commit=False)
+                rom.patient = patient
+                rom.part = part
+                rom.save()
+                return redirect('patient:exercise_add', patient_id=patient_id, part=part, type=type)
+        else:
+            form = NeckTrunkForm(instance=ExerciseList())
+
+        context={'patient':patient, 'part':part, 'form':form}
+        return render(request, 'patient/rom_form.html', context)
+
+    

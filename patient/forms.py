@@ -41,4 +41,9 @@ class ExerciseAddForm(forms.ModelForm):
         model = ExerciseList
         fields = ['date', 'set', 'count', 'time', 'weight', 'done']
 
+class NeckTrunkForm(forms.ModelForm):
+    class Meta:
+        model = NeckTruck
+        fields = ['date', 'flexion', 'extension', 'left_bending', 'right_bending', 'left_rotation', 'right_rotation']
+
     

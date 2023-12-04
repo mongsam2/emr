@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load patient_filter %}
+{% block content %}
+{% load static %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+        <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-4">가동범위검사</span>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto text-center">
+          <li>
+            <a href="{% url 'patient:rom_form' patient_id=patient.id part='경추' %}" class="nav-link align-items-center text-decoration-none">
+              경추
+            </a>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none">
+              흉요추
+            </a>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none">
+              어깨
+            </a>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none">
+              팔꿈치
+            </a>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none">
+              손목
+            </a>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none">
+              고관절
+            </a>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none">
+              무릎
+            </a>
+          </li>
+          <br>
+          <li>
+            <a href="#" class="nav-link align-items-center text-decoration-none">
+              발목
+            </a>
+          </li>
+          <br>
+        </ul>
+        <hr>
+    </div>
+    </div>
+
+    <div class="col-md-6">
+        <br>
+        <form method="post">
+          {% csrf_token %}
+          {% if form.errors %}
+          <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+              <strong>{{ field.label }}</strong>
+              {{ field.errors }}
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            <div class="row">
+                <h4>{{part.part}} 가동범위</h4>
+                <a href="{{exercise.link}}">{{exercise.link}}</a>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text"> 환자 이름 </span>
+                    <input class="form-control" type="text" value={{patient.name}} readonly>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group mb-3">
+                <span class="input-group-text">평가 날짜</span>
+                <input class="form-control" name="date" type="date" value="{{form.date.value}}">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <img src="{% static 'neck.png' %}" class="img-fluid">
+            </div>
+            <div class="row">
+              {% if part.part == '경추' or part.part == '흉요추' %}
+              {% for field in form %}
+              {% if forloop.counter0 != 0 %}
+              <div class="col-md-6">
+                <div class="input-group">
+                  <label class="input-label" for="{{field.name}}">{{field.name}}</label>
+                  <br>
+                  <div class="input-group">
+                    <input class="form-control" id="{{field.name}}" name="set" type="number" min="0" value="{{form.set.value}}" placeholder="">
+                    <span class="input-group-text">도</span>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+            </div>
+            <br>
+            <div class="row">
+              <button type="submit" class="btn btn-primary">확인</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-3">
+      <div class="col-md-3">
+        <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+            <span class="fs-4">{{patient.name}}</span>
+            <a href="{% url 'patient:detail' patient.id %}" class="btn  btn-sm btn-outline-secondary">환자 홈</a></span>
+          </a>
+          <hr>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{patient.front_resident|birth2:patient.back_resident}}</li>
+            <li class="list-group-item">{{patient.back_resident|back2}}</li>
+            <li class="list-group-item">{{patient.phone}}</li>
+            <li class="list-group-item">{{patient.id|id_cut}}</li>
+            <li class="list-group-item">{{patient.memo}}</li>
+          </ul>
+          <hr>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-border table-Secondary table-striped">
+      <thead>
+      <tr class="table-dark">
+          <th scope="col">#</th>
+          <th scope="col">부위</th>
+          <th scope="col">동작1</th>
+          <th scope="col">동작2</th>
+          <th scope="col">동작3</th>
+          <th scope="col">동작4</th>
+          <th scope="col">+</th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for exercise in exercise_list %}
+      <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{exercise.exercise.name}}</td>
+          <td>{{exercise.date}}</td>
+          {% if exercise.done %}<td> <button type="button" class="btn btn-success">완료</button></td>
+          {% else %}<td><button type="button" class="btn btn-outline-secondary">수행 전</button></td>{% endif %}
+          <td>{{exercise.exercise.part.part}}</td>
+          <td>{{exercise.exercise.type.type}}</td>
+          <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">상세</a></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

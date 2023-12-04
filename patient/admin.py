@@ -20,9 +20,9 @@ class ExerciseAdmin(admin.ModelAdmin):
     search_fields = ['name']
 admin.site.register(Exercise, ExerciseAdmin)
 
-class RomAdmin(admin.ModelAdmin):
+'''class RomAdmin(admin.ModelAdmin):
     search_fields = ['patient', 'date']
-admin.site.register(Rom, RomAdmin)
+admin.site.register(Rom, RomAdmin)'''
 
 class ExerciseListAdmin(admin.ModelAdmin):
     search_fields = ['patient', 'date']
@@ -30,6 +30,12 @@ class ExerciseListAdmin(admin.ModelAdmin):
 admin.site.register(ExerciseList, ExerciseListAdmin)
 
 
+admin.site.register(NeckTruck)
+admin.site.register(ShoulderHip)
+admin.site.register(Elbow)
+admin.site.register(Knee)
+admin.site.register(Wrist)
+admin.site.register(Ankle)
 
 
 '''class NeckAdmin(admin.ModelAdmin):
