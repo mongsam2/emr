@@ -30,12 +30,12 @@ class ExerciseListAdmin(admin.ModelAdmin):
 admin.site.register(ExerciseList, ExerciseListAdmin)
 
 
-admin.site.register(NeckTruck)
-admin.site.register(ShoulderHip)
-admin.site.register(Elbow)
-admin.site.register(Knee)
-admin.site.register(Wrist)
-admin.site.register(Ankle)
+admin.site.register(NeckTrunck)
+admin.site.register(ShoulderHip2)
+admin.site.register(Elbow2)
+admin.site.register(Knee2)
+admin.site.register(Wrist2)
+admin.site.register(Ankle2)
 
 
 '''class NeckAdmin(admin.ModelAdmin):

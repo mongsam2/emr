@@ -124,7 +124,7 @@ class ExerciseList(models.Model):
 
 #------------------------------------------------------------------------------------------
 
-class NeckTruck(models.Model):
+class NeckTrunck(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     part = models.ForeignKey(Part, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
@@ -136,48 +136,124 @@ class NeckTruck(models.Model):
     left_rotation = models.IntegerField()
     right_rotation = models.IntegerField()
 
-class ShoulderHip(models.Model):
+'''class ShoulderHip(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     part = models.ForeignKey(Part, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
-    flexion = models.IntegerField()
-    extension = models.IntegerField()
-    lateral_rotation = models.IntegerField()
-    medial_rotation = models.IntegerField()
-    abduction = models.IntegerField()
-    adduction = models.IntegerField()
+    flexion_L = models.IntegerField()
+    flexion_R = models.IntegerField()
+    extension_L = models.IntegerField()
+    extension_R = models.IntegerField()
+    lateral_rotation_L = models.IntegerField()
+    lateral_rotation_R = models.IntegerField()
+    medial_rotation_L = models.IntegerField()
+    medial_rotation_R = models.IntegerField()
+    abduction_L = models.IntegerField()
+    abduction_R = models.IntegerField()
+    adduction_L = models.IntegerField()
+    adduction_R = models.IntegerField()'''
 
-class Elbow(models.Model):
+class ShoulderHip2(models.Model):
+    code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
+    flexion_L = models.IntegerField()
+    flexion_R = models.IntegerField()
+    extension_L = models.IntegerField()
+    extension_R = models.IntegerField()
+    lateral_rotation_L = models.IntegerField()
+    lateral_rotation_R = models.IntegerField()
+    medial_rotation_L = models.IntegerField()
+    medial_rotation_R = models.IntegerField()
+    abduction_L = models.IntegerField()
+    abduction_R = models.IntegerField()
+    adduction_L = models.IntegerField()
+    adduction_R = models.IntegerField()
+
+'''class Elbow(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     flexion = models.IntegerField()
     extension = models.IntegerField()
     pronation = models.IntegerField()
-    supination = models.IntegerField()
+    supination = models.IntegerField()'''
 
-class Knee(models.Model):
+class Elbow2(models.Model):
+    code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
+    flexion_L = models.IntegerField()
+    flexion_R = models.IntegerField()
+    extension_L = models.IntegerField()
+    extension_R = models.IntegerField()
+    pronation_L = models.IntegerField()
+    pronation_R = models.IntegerField()
+    supination_L = models.IntegerField()
+    supination_R = models.IntegerField()
+
+'''class Knee(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     flexion = models.IntegerField()
-    extension = models.IntegerField()
+    extension = models.IntegerField()'''
 
-class Wrist(models.Model):
+class Knee2(models.Model):
+    code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
+    flexion_L = models.IntegerField()
+    flexion_R = models.IntegerField()
+    extension_L = models.IntegerField()
+    extension_R = models.IntegerField()
+
+'''class Wrist(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     flexion = models.IntegerField()
     extension = models.IntegerField()
     ulnar_deviation = models.IntegerField()
-    radial_deviation = models.IntegerField()
+    radial_deviation = models.IntegerField()'''
 
-class Ankle(models.Model):
+class Wrist2(models.Model):
+    code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
+    flexion_L = models.IntegerField()
+    flexion_R = models.IntegerField()
+    extension_L = models.IntegerField()
+    extension_R = models.IntegerField()
+    ulnar_deviation_L = models.IntegerField()
+    ulnar_deviation_R = models.IntegerField()
+    radial_deviation_L = models.IntegerField()
+    radial_deviation_R = models.IntegerField()
+
+'''class Ankle(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     flexion = models.IntegerField()
     extension = models.IntegerField()
     inversion = models.IntegerField()
-    eversion = models.IntegerField()
+    eversion = models.IntegerField()'''
+
+class Ankle2(models.Model):
+    code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
+    flexion_L = models.IntegerField()
+    flexion_R = models.IntegerField()
+    extension_L = models.IntegerField()
+    extension_R = models.IntegerField()
+    inversion_L = models.IntegerField()
+    inversion_R = models.IntegerField()
+    eversion_L = models.IntegerField()
+    eversion_R = models.IntegerField()

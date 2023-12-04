@@ -69,7 +69,7 @@ def exercise_form(request, patient_id, part, type, exercise):
             exercise_list.save()
             return redirect('patient:exercise_add', patient_id=patient_id, part=part, type=type)
     else:
-        form = ExerciseAddForm(instance=ExerciseList())
+        form = ExerciseAddForm()
 
     context={'patient':patient, 'exercise':exercise, 'form':form, 'exercise_list':exercise_list}
     return render(request, 'patient/exercise_form.html', context)
@@ -80,21 +80,51 @@ def rom(request, patient_id):
     return render(request, 'patient/rom.html', context)
 
 def rom_form(request, patient_id, part):
+    model_dic = {'경추':NeckTrunck, '흉요추':NeckTrunck, '어깨':ShoulderHip2, '고관절':ShoulderHip2, '팔꿈치':Elbow2, '무릎':Knee2, '손목':Wrist2, '발목':Ankle2}
+    model = model_dic[part].objects.filter(patient=patient_id)
     patient = get_object_or_404(Patient2, pk=patient_id)
-    if part=='경추':
-        part = get_object_or_404(Part, pk=part)
+    if part in ['경추', '흉요추']:
+        part_model = get_object_or_404(Part, pk=part)
         if request.method == 'POST':
             form = NeckTrunkForm(request.POST)
             if form.is_valid():
                 rom = form.save(commit=False)
                 rom.patient = patient
-                rom.part = part
+                rom.part = part_model
                 rom.save()
-                return redirect('patient:exercise_add', patient_id=patient_id, part=part, type=type)
+                return redirect('patient:rom', patient_id=patient_id)
         else:
-            form = NeckTrunkForm(instance=ExerciseList())
-
-        context={'patient':patient, 'part':part, 'form':form}
+            form = NeckTrunkForm()
+        context={'patient':patient, 'part':part_model, 'form':form, 'model':model}
+        return render(request, 'patient/rom_form.html', context)
+    elif part in ['어깨', '고관절']:
+        part_model = get_object_or_404(Part, pk=part)
+        if request.method == 'POST':
+            form = ShoulderHipForm(request.POST)
+            if form.is_valid():
+                rom = form.save(commit=False)
+                rom.patient = patient
+                rom.part = part_model
+                rom.save()
+                return redirect('patient:rom', patient_id=patient_id)
+        else:
+            form = ShoulderHipForm()
+        context={'patient':patient, 'part':part, 'form':form, 'model':model}
+        return render(request, 'patient/rom_form.html', context)
+    else:
+        dic = {'팔꿈치':ElbowForm, '무릎':KneeForm, '손목':WristForm, '발목':AnkleForm}
+        part_model = get_object_or_404(Part, pk=part)
+        if request.method == 'POST':
+            form = dic[part](request.POST)
+            if form.is_valid():
+                rom = form.save(commit=False)
+                rom.patient = patient
+                rom.part = part_model
+                rom.save()
+                return redirect('patient:rom', patient_id=patient_id)
+        else:
+            form = dic[part]()
+        context={'patient':patient, 'part':part_model, 'form':form, 'model':model}
         return render(request, 'patient/rom_form.html', context)
 
     

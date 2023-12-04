@@ -43,7 +43,32 @@ class ExerciseAddForm(forms.ModelForm):
 
 class NeckTrunkForm(forms.ModelForm):
     class Meta:
-        model = NeckTruck
+        model = NeckTrunck
         fields = ['date', 'flexion', 'extension', 'left_bending', 'right_bending', 'left_rotation', 'right_rotation']
 
+class ShoulderHipForm(forms.ModelForm):
+    class Meta:
+        model = ShoulderHip2
+        fields = ['date', 'flexion_L', 'flexion_R', 'extension_L', 'extension_R', 'lateral_rotation_L', 'lateral_rotation_R', 'medial_rotation_L', 'medial_rotation_R', 'abduction_L', 'abduction_R', 'adduction_L', 'adduction_R']
+
+class ElbowForm(forms.ModelForm):
+    class Meta:
+        model = Elbow2
+        fields = ['date', 'flexion_L', 'flexion_R' ,'extension_L','extension_R', 'pronation_L','pronation_R', 'supination_L', 'supination_R']
+
+class KneeForm(forms.ModelForm):
+    class Meta:
+        model = Knee2
+        fields = ['date', 'flexion_L', 'flexion_R', 'extension_L', 'extension_R']
     
+class WristForm(forms.ModelForm):
+    class Meta:
+        model = Wrist2
+        fields = ['date', 'flexion_L', 'flexion_R', 'extension_L', 'extension_R', 'ulnar_deviation_L', 'ulnar_deviation_R', 'radial_deviation_L', 'radial_deviation_R']
+
+class AnkleForm(forms.ModelForm):
+    class Meta:
+        model = Ankle2
+        fields = ['date', 'flexion_L', 'flexion_R', 'extension_L', 'extension_R', 'inversion_L', 'inversion_R', 'eversion_L', 'eversion_R'] 
+
+        
