@@ -66,17 +66,16 @@
     <div class="col-md-6">
         <br>
         <form method="post">
-          {% csrf_token %}
-          {% if form.errors %}
-          <div class="alert alert-danger" role="alert">
-            {% for field in form %}
-            {% if field.errors %}
-            <div>
-              <strong>{{ field.label }}</strong>
-              {{ field.errors }}
-              </div>
+            {% csrf_token %}
+            {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+
+              {% for field in form %}
+              {% if field.errors %}
+                {{ field.label }}, 
               {% endif %}
               {% endfor %}
+              <strong>값을 입력하지 않았습니다.</strong>
             </div>
             {% endif %}
             <div class="row">
@@ -110,7 +109,7 @@
                   <label class="input-label" for="{{field.name}}">{{field.name}}</label>
                   <br>
                   <div class="input-group">
-                    <input class="form-control" id="{{field.name}}" name="{{field.name}}" type="number" min="0" value="{{form.value}}" placeholder="">
+                    <input class="form-control" id="{{field.name}}" name="{{field.name}}" type="number" min="0" value="{{form.value|default_if_none:'' }}">
                     <span class="input-group-text">°</span>
                   </div>
                 </div>
@@ -125,7 +124,7 @@
                   <label class="input-label" for="{{field.name}}">{{field.name}}</label>
                   <br>
                   <div class="input-group">
-                    <input class="form-control" id="{{field.name}}" name="{{field.name}}" type="number" min="0" value="{{form.value}}" placeholder="">
+                    <input class="form-control" id="{{field.name}}" name="{{field.name}}" type="number" min="0" value="{{form.value|default_if_none:'' }}">
                     <span class="input-group-text">°</span>
                   </div>
                 </div>
@@ -140,11 +139,12 @@
                   <label class="input-label" for="{{field.name}}">{{field.name}}</label>
                   <br>
                   <div class="input-group">
-                    <input class="form-control" id="{{field.name}}" name="{{field.name}}" type="number" min="0" value="{{form.value}}" placeholder="">
+                    <input class="form-control" id="{{field.name}}" name="{{field.name}}" type="number" min="0" value="{{form.value|default_if_none:'' }}">
                     <span class="input-group-text">°</span>
                   </div>
                 </div>
               </div>
+              <br>
               {% endif %}
               {% endfor %}
 
@@ -179,33 +179,136 @@
     </div>
   </div>
   <div class="row">
-    <table class="table table-border table-Secondary table-striped">
+    {% if part.part == '경추' or part.part == '흉요추' %}
+    <table class="table table-border table-info table-striped">
       <thead>
-      <tr class="table-dark">
+      <tr class="table-primary">
           <th scope="col">#</th>
-          <th scope="col">부위</th>
-          <th scope="col">동작1</th>
-          <th scope="col">동작2</th>
-          <th scope="col">동작3</th>
-          <th scope="col">동작4</th>
-          <th scope="col">+</th>
+          <th scope="col">flexion</th>
+          <th scope="col">extension</th>
+          <th scope="col">left_bending</th>
+          <th scope="col">right_bending</th>
+          <th scope="col">left_rotation</th>
+          <th scope="col">right_rotation</th>
       </tr>
       </thead>
       <tbody>
-      {% for data in model %}
       <tr>
-          <th scope="row">{{forloop.counter}}</th>
-          <td>{{data.code}}</td>
-          <td>{{exercise.date}}</td>
-          {% if exercise.done %}<td> <button type="button" class="btn btn-success">완료</button></td>
-          {% else %}<td><button type="button" class="btn btn-outline-secondary">수행 전</button></td>{% endif %}
-          <td>{{exercise.exercise.part.part}}</td>
-          <td>{{exercise.exercise.type.type}}</td>
-          <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">상세</a></td>
+          <td>최근평가</td>
+          <td>{{first.flexion}}°</td>
+          <td>{{first.extension}}°</td>
+          <td>{{first.left_bending}}°</td>
+          <td>{{first.right_bending}}°</td>
+          <td>{{first.left_rotation}}°</td>
+          <td>{{first.right_rotation}}°</td>
       </tr>
-      {% endfor %}
+      </tbody>
+  {% elif part.part == '어깨' or part.part == '고관절' %}
+    <table class="table table-border table-info table-striped">
+      <thead>
+      <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">flexion</th>
+          <th scope="col">extension</th>
+          <th scope="col">lateral_rotation</th>
+          <th scope="col">medial_rotation</th>
+          <th scope="col">abduction</th>
+          <th scope="col">adduction</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>최근평가</td>
+          <td>{{first.flexion_L}}° / {{first.flexion_R}}°</td>
+          <td>{{first.extension_L}}° / {{first.extension_R}}°</td>
+          <td>{{first.lateral_rotation_L}}° / {{first.lateral_rotation_R}}°</td>
+          <td>{{first.medial_rotation_L}}° / {{first.medial_rotation_R}}°</td>
+          <td>{{first.abduction_L}}° / {{first.abduction_R}}°</td>
+          <td>{{first.adduction_L}}° / {{first.adduction_R}}°</td>
+      </tr>
       </tbody>
     </table>
+    {% elif part.part == '팔꿈치' %}
+    <table class="table table-border table-info table-striped">
+      <thead>
+      <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">flexion</th>
+          <th scope="col">extension</th>
+          <th scope="col">pronation</th>
+          <th scope="col">supination</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>최근평가</td>
+          <td>{{first.flexion_L}}° / {{first.flexion_R}}°</td>
+          <td>{{first.extension_L}}° / {{first.extension_R}}°</td>
+          <td>{{first.pronation_L}}° / {{first.pronation_R}}°</td>
+          <td>{{first.medial_supination_L}}° / {{first.supination_R}}°</td>
+      </tr>
+      </tbody>
+    </table>
+    {% elif part.part == '손목' %}
+    <table class="table table-border table-info table-striped">
+      <thead>
+      <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">flexion</th>
+          <th scope="col">extension</th>
+          <th scope="col">ulnar_deviation</th>
+          <th scope="col">radial_deviation</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>최근평가</td>
+          <td>{{first.flexion_L}}° / {{first.flexion_R}}°</td>
+          <td>{{first.extension_L}}° / {{first.extension_R}}°</td>
+          <td>{{first.ulnar_deviation_L}}° / {{first.ulnar_deviation_R}}°</td>
+          <td>{{first.radial_deviation_L}}° / {{first.radial_deviation_R}}°</td>
+      </tr>
+      </tbody>
+    </table>
+    {% elif part.part == '무릎' %}
+    <table class="table table-border table-info table-striped">
+      <thead>
+      <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">flexion</th>
+          <th scope="col">extension</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>최근평가</td>
+          <td>{{first.flexion_L}}° / {{first.flexion_R}}°</td>
+          <td>{{first.extension_L}}° / {{first.extension_R}}°</td>
+      </tr>
+      </tbody>
+    </table>
+    {% elif part.part == '발목' %}
+    <table class="table table-border table-info table-striped">
+      <thead>
+      <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">flexion</th>
+          <th scope="col">extension</th>
+          <th scope="col">inversion</th>
+          <th scope="col">eversion</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>최근평가</td>
+          <td>{{first.flexion_L}}° / {{first.flexion_R}}°</td>
+          <td>{{first.extension_L}}° / {{first.extension_R}}°</td>
+          <td>{{first.inversion_L}}° / {{first.inversion_R}}°</td>
+          <td>{{first.eversion_L}}° / {{first.eversion_R}}°</td>
+      </tr>
+      </tbody>
+    </table>
+  {% endif %}
   </div>
 </div>
 {% endblock %}

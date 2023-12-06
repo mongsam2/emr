@@ -183,7 +183,7 @@ class ShoulderHip2(models.Model):
 
 class Elbow2(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
-    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, default='팔꿈치')
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     flexion_L = models.IntegerField()
@@ -204,7 +204,7 @@ class Elbow2(models.Model):
 
 class Knee2(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
-    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, default='무릎')
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     flexion_L = models.IntegerField()
@@ -223,7 +223,7 @@ class Knee2(models.Model):
 
 class Wrist2(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
-    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, default='손목')
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     flexion_L = models.IntegerField()
@@ -246,7 +246,7 @@ class Wrist2(models.Model):
 
 class Ankle2(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
-    part = models.ForeignKey(Part, on_delete=models.CASCADE)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, default='발목')
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     flexion_L = models.IntegerField()
