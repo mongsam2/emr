@@ -13,5 +13,5 @@ urlpatterns = [
     path('<str:patient_id>/<str:part>/<str:type>/<str:exercise>/', views.exercise_form, name='exercise_form'),
     path('<str:patient_id>/rom/', views.rom, name='rom'),
     path('<str:patient_id>/<str:part>/rom', views.rom_form, name='rom_form'),
-    
+    path('<str:patient_id>/data/', views.data, name='data')
 ]

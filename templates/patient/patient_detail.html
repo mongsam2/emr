@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-      
+        <hr>
         <div class="row">
           <div class="col-md-4">
             <div class="card bg-info mb-3 mt-3 ml-3" style="max-width: 18rem;">
@@ -56,22 +56,20 @@
       
           <div class="col-md-4">
             <div class="card bg-info mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
-              <div class="card-header">재활정보</div>
+              <div class="card-header">물리치료</div>
               <img src="{% static '재활정보.jpg' %}" class="card-img-top">
             </div>
           </div>
         </div>
-      
+        <hr>
         <div class="row">
           <div class="col-md-4">
-            <div class="card bg-secondary mb-3 mt-3 ml-3" style="max-width: 18rem;">
-              <div class="card-header">운동처방</div>
-              <div class="card-body">
-                <h5 class="card-title">Primary card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              </div>
+            <div class="card bg-info mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">
+              <div class="card-header">환자 데이터(물리치료실)</div>
+              <a href="{% url 'patient:data' patient.id %}"><img src="{% static '기능평가.jpg' %}" class="card-img-top"></a>
             </div>
           </div>
+       
       
           <div class="col-md-4">
             <div class="card bg-secondary mb-3 mt-3 ml-3 mr-3" style="max-width: 18rem;">

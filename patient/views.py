@@ -126,4 +126,7 @@ def rom_form(request, patient_id, part):
         context={'patient':patient, 'part':part_model, 'form':form, 'model':model, 'first':first}
         return render(request, 'patient/rom_form.html', context)
 
-    
+def data(request, patient_id):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    context = {'patient':patient}
+    return render(request, 'patient/data.html', context)

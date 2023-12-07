@@ -45,7 +45,6 @@ class NeckTrunkForm(forms.ModelForm):
     class Meta:
         model = NeckTrunck
         fields = ['date', 'flexion', 'extension', 'left_bending', 'right_bending', 'left_rotation', 'right_rotation']
-        labels = {'flexion':'Flexion'}
 
 class ShoulderHipForm(forms.ModelForm):
     class Meta:
