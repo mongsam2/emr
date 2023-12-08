@@ -130,7 +130,7 @@
               <canvas id="partPie"></canvas>
             </div>
             <div class="col-md-6">
-
+              <canvas id="typePie"></canvas>
             </div>
           </div>
         </div>
@@ -167,7 +167,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-
+const data1 = {{data1_list}};
+const data2 = {{data2_list}};
 const partpie = document.getElementById('partPie');
 const typepie = document.getElementById('typePie');
 
@@ -182,7 +183,7 @@ labels: [
 ],
 datasets: [{
   label: 'partPie',
-  data: [10, 10, 10, 10, 10, 10],
+  data: data1,
   backgroundColor: [
     'rgb(255, 99, 132)',
     'rgb(75, 192, 192)',
@@ -199,7 +200,32 @@ const config_part = {
 type: 'pie',
 data: data_part,
 };
-new Chart(typepie, config_part);
+
+const data_type = {
+labels: [
+  '스트레칭',
+  '가동성 운동',
+  '소도구 운동',
+  '근력 운동',
+],
+datasets: [{
+  label: 'partPie',
+  data: data2,
+  backgroundColor: [
+    'rgb(255, 99, 132)',
+    'rgb(75, 192, 192)',
+    'rgb(54, 162, 235)',
+    'rgb(153, 102, 235)',
+  ],
+  hoverOffset: 4
+}]
+};
+
+const config_type = {
+type: 'pie',
+data: data_type,
+};
+new Chart(typepie, config_type);
 new Chart(partpie, config_part);
 </script>
 <!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 End -->

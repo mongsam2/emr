@@ -135,19 +135,32 @@ def data_index(request, patient_id):
 def data1(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
     exercise_list = ExerciseList.objects.filter(patient=patient)
-    total = exercise_list.count()
+    
     part_group = exercise_list.values('exercise__part').annotate(part_count=Count('code'))
     data1 = [item['part_count'] for item in part_group]
     data1_list = [0]*6
     for i in range(len(data1)):
         data1_list[i] = data1[i]
-    context = {'patient':patient, 'total':total, 'data1_list':data1_list}
+
+    type_group = exercise_list.values('exercise__type').annotate(type_count=Count('code'))
+    data1 = [item['type_count'] for item in type_group]
+    data2_list = [0]*4
+    for i in range(len(data1)):
+        data2_list[i] = data1[i]
+
+    context = {'patient':patient,'data1_list':data1_list, 'data2_list':data2_list}
     return render(request, 'patient/data1.html', context)
 
 def exercise_data(request, patient_id, part, type):
     patient = get_object_or_404(Patient2, pk=patient_id)
     part_model = get_object_or_404(Part, pk=part)
     type_model = get_object_or_404(ExerciseType, pk=type)
-    exercises = Exercise.objects.filter(part=part_model, type = type_model)
+    exercises = Exercise.objects.filter(part=part, type=type)
     context = {'patient':patient, 'exercises':exercises}
     return render(request, 'patient/exercise_data.html', context)
+
+def exercise_graph(request, patient_id, exercise):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    exercise_list = ExerciseList.objects.filter(exercise=exercise).order_by('-date')
+    context = {'patient':patient, 'exercise_list':exercise_list}
+    return render(request, 'patient/exercise_graph.html', context)
