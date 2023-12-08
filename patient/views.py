@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 # Create your views here.
 def index(request):
@@ -126,7 +127,27 @@ def rom_form(request, patient_id, part):
         context={'patient':patient, 'part':part_model, 'form':form, 'model':model, 'first':first}
         return render(request, 'patient/rom_form.html', context)
 
-def data(request, patient_id):
+def data_index(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
     context = {'patient':patient}
-    return render(request, 'patient/data.html', context)
+    return render(request, 'patient/data_index.html', context)
+
+def data1(request, patient_id):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    exercise_list = ExerciseList.objects.filter(patient=patient)
+    total = exercise_list.count()
+    part_group = exercise_list.values('exercise__part').annotate(part_count=Count('code'))
+    data1 = [item['part_count'] for item in part_group]
+    data1_list = [0]*6
+    for i in range(len(data1)):
+        data1_list[i] = data1[i]
+    context = {'patient':patient, 'total':total, 'data1_list':data1_list}
+    return render(request, 'patient/data1.html', context)
+
+def exercise_data(request, patient_id, part, type):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    part_model = get_object_or_404(Part, pk=part)
+    type_model = get_object_or_404(ExerciseType, pk=type)
+    exercises = Exercise.objects.filter(part=part_model, type = type_model)
+    context = {'patient':patient, 'exercises':exercises}
+    return render(request, 'patient/exercise_data.html', context)
