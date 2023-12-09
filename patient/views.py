@@ -156,11 +156,23 @@ def exercise_data(request, patient_id, part, type):
     part_model = get_object_or_404(Part, pk=part)
     type_model = get_object_or_404(ExerciseType, pk=type)
     exercises = Exercise.objects.filter(part=part, type=type)
-    context = {'patient':patient, 'exercises':exercises}
+    context = {'patient':patient, 'exercises':exercises, 'part':part, 'type':type}
     return render(request, 'patient/exercise_data.html', context)
 
-def exercise_graph(request, patient_id, exercise):
+def exercise_graph(request, patient_id, part, type, exercise):
     patient = get_object_or_404(Patient2, pk=patient_id)
-    exercise_list = ExerciseList.objects.filter(exercise=exercise).order_by('-date')
-    context = {'patient':patient, 'exercise_list':exercise_list}
+    exercises = Exercise.objects.filter(part=part, type=type)
+    exercise_list = ExerciseList.objects.filter(patient=patient, exercise=exercise).order_by('-date')
+    date_list = ['']*len(exercise_list)
+    set_list = [0]*len(exercise_list)
+    count_list = [0]*len(exercise_list)
+    weight_list = [0]*len(exercise_list)
+    time_list = [0]*len(exercise_list)
+    for i in range(len(exercise_list)):
+        date_list[i] = exercise_list[i].date.strftime("%Y-%m-%d")
+        set_list[i] = exercise_list[i].set
+        count_list[i] = exercise_list[i].count
+        weight_list[i] = exercise_list[i].weight
+        time_list[i] = exercise_list[i].time
+    context = {'patient':patient, 'exercise':exercise, 'set_list':set_list, 'count_list':count_list, 'weight_list':weight_list, 'time_list':time_list, 'date_list':date_list, 'exercises':exercises}
     return render(request, 'patient/exercise_graph.html', context)

@@ -16,5 +16,5 @@ urlpatterns = [
     path('<str:patient_id>/data1/', views.data1, name='data1'),
     path('<str:patient_id>/data_index/', views.data_index, name='data_index'),
     path('<str:patient_id>/<str:part>/<str:type>/exercise/data/', views.exercise_data, name='exercise_data'),
-    path('<str:patient_id>/<str:exercise>/exercise/graph', views.exercise_graph, name='exercise_graph'),
+    path('<str:patient_id>/<str:part>/<str:type>/<str:exercise>/graph', views.exercise_graph, name='exercise_graph'),
 ]

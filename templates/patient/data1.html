@@ -125,6 +125,8 @@
 
       <div class="col-md-6">
         <div class="container-fluid">
+          <br>
+          <br>
           <div class="row">
             <div class="col-md-6">
               <canvas id="partPie"></canvas>
@@ -167,8 +169,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-const data1 = {{data1_list}};
-const data2 = {{data2_list}};
+const data1 = {{data1_list|safe}};
+const data2 = {{data2_list|safe}};
 const partpie = document.getElementById('partPie');
 const typepie = document.getElementById('typePie');
 
@@ -182,7 +184,7 @@ labels: [
   '둔근/종아리'
 ],
 datasets: [{
-  label: 'partPie',
+  label: '부위',
   data: data1,
   backgroundColor: [
     'rgb(255, 99, 132)',
@@ -209,13 +211,13 @@ labels: [
   '근력 운동',
 ],
 datasets: [{
-  label: 'partPie',
+  label: '유형',
   data: data2,
   backgroundColor: [
-    'rgb(255, 99, 132)',
-    'rgb(75, 192, 192)',
-    'rgb(54, 162, 235)',
-    'rgb(153, 102, 235)',
+    'rgba(255, 99, 132, 0.7)',
+    'rgba(75, 192, 192, 0.7)',
+    'rgba(54, 162, 235, 0.7)',
+    'rgba(153, 102, 235, 0.7)',
   ],
   hoverOffset: 4
 }]

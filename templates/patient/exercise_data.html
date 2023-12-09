@@ -129,9 +129,7 @@
             <tr class="table-dark">
                 <th scope="col">#</th>
                 <th scope="col">운동이름</th>
-                <th scope="col">운동부위</th>
-                <th scope="col">운동종류</th>
-                <th scope="col">조회</th>
+                <th scope="col">+</th>
             </tr>
             </thead>
             <tbody>
@@ -139,9 +137,7 @@
             <tr>
                 <th scope="row">{{forloop.counter}}</th>
                 <td>{{exercise.name}}</td>
-                <td>{{exercise.part.part}}</td>
-                <td>{{exercise.type.type}}</td>
-                <td><a class="btn btn-primary" href="{% url 'patient:exercise_graph' patient_id=patient.id exercise=exercise.name %}" role="button">조회</a></td>
+                <td><a class="btn btn-primary" href="{% url 'patient:exercise_graph' patient_id=patient.id part=part type=type exercise=exercise.name %}" role="button">데이터 조회</a></td>
             </tr>
             {% endfor %}
             </tbody>
