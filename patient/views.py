@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
+from .diagstate import *
 from .forms import *
 from django.core.paginator import Paginator
 from django.db.models import Count
@@ -12,6 +13,14 @@ def index(request):
     page_obj = paginator.get_page(page)
     context = {'patient_list':page_obj}
     return render(request, 'patient/patient_list.html', context)
+
+def addDiag(request):
+    if request.method == 'POST':
+        button_value = request.POST.get('button_value')
+        if not DiagState.objects.filter(number=button_value).exists():
+            diag_state = DiagState(number=button_value, state=0)
+            diag_state.save()
+    return redirect('patient:index')
 
 def detail(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)

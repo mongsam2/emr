@@ -5,6 +5,7 @@ app_name = 'patient'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('api/addDiag', views.addDiag, name='addDiag'),
     path('add/', views.patient_add, name='patient_add'),
     path('<str:patient_id>/detail/', views.detail, name='detail'),
     path('<str:patient_id>/modify', views.patient_modify, name = 'patient_modify'),
