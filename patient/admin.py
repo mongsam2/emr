@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import *
-
+from .diagstate import *
 # Register your models here.
 class PatientAdmin(admin.ModelAdmin):
     search_fields = ['name']
@@ -30,12 +30,17 @@ class ExerciseListAdmin(admin.ModelAdmin):
 admin.site.register(ExerciseList, ExerciseListAdmin)
 
 
+class DiagStateAdmin(admin.ModelAdmin):
+    search_fields = ['state']
+admin.site.register(DiagState, DiagStateAdmin)
+
 admin.site.register(NeckTrunck)
 admin.site.register(ShoulderHip2)
 admin.site.register(Elbow2)
 admin.site.register(Knee2)
 admin.site.register(Wrist2)
 admin.site.register(Ankle2)
+
 
 
 '''class NeckAdmin(admin.ModelAdmin):
