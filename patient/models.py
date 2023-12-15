@@ -19,6 +19,7 @@ class Patient2(models.Model):
     front_resident = models.CharField(max_length=6)
     back_resident = models.CharField(max_length=1)
     phone = models.CharField(max_length=30)
+    state = models.IntegerField(choices=[(-1, 'default'),(0, '진료 대기'), (1, '진료 중')])
     memo = models.TextField(default='memo')
 
     def __str__(self):

@@ -28,8 +28,8 @@
             <th scope="col">성 별</th>
             <th scope="col">생년월일</th>
             <th scope="col">id</th>
-            <th scope="col">진료 접수</th>
             <th scope="col">상세</th>
+            <th scope="col">접수</th>
         </tr>
         </thead>
         <tbody>
@@ -40,8 +40,12 @@
             <td>{{patient.back_resident|back}}</td>
             <td>{{patient.front_resident|birth:patient.back_resident}}</td>
             <td>{{patient.id|id_cut}}</td>
-            <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">전송</a></td>
             <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">조회</a></td>
+            {%if patient.state == -1 %}
+            <td><a class="btn btn-primary" href="{% url 'patient:addDiag' patient.id %}" role="button">접수</a></td>
+            {%elif patient.state == 0  or patient.state == 1%}
+                <td><a class="btn btn-primary" >접수 완료</a></td>
+            {%endif%}
         </tr>
         {% endfor %}
         </tbody>

@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import *
-from .diagstate import *
 # Register your models here.
 class PatientAdmin(admin.ModelAdmin):
     search_fields = ['name']
@@ -32,7 +31,6 @@ admin.site.register(ExerciseList, ExerciseListAdmin)
 
 class DiagStateAdmin(admin.ModelAdmin):
     search_fields = ['state']
-admin.site.register(DiagState, DiagStateAdmin)
 
 admin.site.register(NeckTrunck)
 admin.site.register(ShoulderHip2)
