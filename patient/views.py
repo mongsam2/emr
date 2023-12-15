@@ -13,10 +13,23 @@ def index(request):
     context = {'patient_list':page_obj}
     return render(request, 'patient/patient_list.html', context)
 
+def diag(request):
+    page = request.GET.get('page', 1)
+    patient_list = Patient2.objects.exclude(state= 0).order_by('id')
+    paginator = Paginator(patient_list, 10)
+    page_obj = paginator.get_page(page)
+    context = {'patient_list':page_obj}
+    return render(request, 'patient/patient_diag_list.html', context)
+
+def changeDiag(request, patient_id , state):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    patient.state = state
+    patient.save()
+    return redirect('patient:diag')
 
 def addDiag(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
-    patient.state = 0
+    patient.state = 1
     patient.save()
     return redirect('patient:index')
 

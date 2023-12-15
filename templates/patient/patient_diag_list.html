@@ -41,11 +41,24 @@
             <td>{{patient.front_resident|birth:patient.back_resident}}</td>
             <td>{{patient.id|id_cut}}</td>
             <td><a class="btn btn-primary" href="{% url 'patient:detail' patient.id %}" role="button">조회</a></td>
-            {%if patient.state == 0 %}
-            <td><a class="btn btn-primary" href="{% url 'patient:addDiag' patient.id %}" role="button">접수</a></td>
-            {%elif patient.state == 1  or patient.state == 2%}
-                <td><a class="btn btn-primary" >접수 완료</a></td>
-            {%endif%}
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if patient.state == 1 %}
+                            진료 대기
+                        {% elif patient.state == 2 %}
+                            진료 중
+                        {% else %}
+                            진료 완료
+                        {% endif %}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'patient:changeDiag' patient.id 1 %}">진료 대기</a></li>
+                        <li><a class="dropdown-item" href="{% url 'patient:changeDiag' patient.id 2 %}">진료 중</a></li>
+                        <li><a class="dropdown-item" href="{% url 'patient:changeDiag' patient.id 0 %}">진료 완료</a></li>
+                    </ul>
+                </div>
+            </td>
         </tr>
         {% endfor %}
         </tbody>
