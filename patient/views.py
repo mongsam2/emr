@@ -186,6 +186,44 @@ def rom_graph(request, patient_id, part):
     model_dic = {'경추':NeckTrunck, '흉요추':NeckTrunck, '어깨':ShoulderHip2, '고관절':ShoulderHip2, '팔꿈치':Elbow2, '무릎':Knee2, '손목':Wrist2, '발목':Ankle2}
     patient = get_object_or_404(Patient2, pk=patient_id)
     model = model_dic[part]
+    rom_list = model.objects.filter(patient=patient, part=part).order_by('-date')[:5]
+    
+    if part=='경추' or part=='흉요추':
+        date_list = ['']*len(rom_list)
+        flexions = [0]*len(rom_list)
+        extensions = [0]*len(rom_list)
+        left_bendings = [0]*len(rom_list)
+        right_bendings = [0]*len(rom_list)
+        left_rotations = [0]*len(rom_list)
+        right_rotations = [0]*len(rom_list)
+        for i in range(len(rom_list)):
+            date_list[i] = rom_list[i].date.strftime('%Y-%m-%d')
+            flexions[i] = rom_list[i].flexion
+            extensions[i] = rom_list[i].extension
+            left_bendings[i] = rom_list[i].left_bending
+            right_bendings[i] =  rom_list[i].right_bending
+            left_rotations[i] =  rom_list[i].left_rotation
+            right_rotations[i] =  rom_list[i].right_rotation
 
-    context = {'patient':patient}
-    return render(request, 'patient/rom_graph', context)
+        context = {'patient':patient, 'date_list':date_list[::-1], 'flexions':flexions[::-1], 'extensions':extensions[::-1], 'left_bendings':left_bendings[::-1], 'right_bendings':right_bendings[::-1], 'left_rotations':left_rotations[::-1], 'right_rotations':right_rotations[::-1]}
+        return render(request, 'patient/rom_graph.html', context)
+    
+    elif part=='어깨' or part=='고관절':
+        date_list = ['']*len(rom_list)
+        flexions = [0]*len(rom_list)
+        extensions = [0]*len(rom_list)
+        left_bendings = [0]*len(rom_list)
+        right_bendings = [0]*len(rom_list)
+        left_rotations = [0]*len(rom_list)
+        right_rotations = [0]*len(rom_list)
+        for i in range(len(rom_list)):
+            date_list[i] = rom_list[i].date.strftime('%Y-%m-%d')
+            flexions[i] = rom_list[i].flexion
+            extensions[i] = rom_list[i].extension
+            left_bendings[i] = rom_list[i].left_bending
+            right_bendings[i] =  rom_list[i].right_bending
+            left_rotations[i] =  rom_list[i].left_rotation
+            right_rotations[i] =  rom_list[i].right_rotation
+
+        context = {'patient':patient, 'date_list':date_list[::-1], 'flexions':flexions[::-1], 'extensions':extensions[::-1], 'left_bendings':left_bendings[::-1], 'right_bendings':right_bendings[::-1], 'left_rotations':left_rotations[::-1], 'right_rotations':right_rotations[::-1], 'part':part}
+        return render(request, 'patient/rom_graph.html', context)

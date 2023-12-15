@@ -34,56 +34,56 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-md-3">
+      <div class="col-md-3">
         <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
           <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
           <span class="fs-4">가동범위검사</span>
           <hr>
           <ul class="nav nav-pills flex-column mb-auto text-center">
             <li>
-              <a href="{% url 'patient:rom_form' patient_id=patient.id part='경추' %}" class="nav-link align-items-center text-decoration-none">
+              <a href="{% url 'patient:rom_graph' patient_id=patient.id part='경추' %}" class="nav-link align-items-center text-decoration-none">
                 경추
               </a>
             </li>
             <br>
             <li>
-              <a href="{% url 'patient:rom_form' patient_id=patient.id part='흉요추' %}" class="nav-link align-items-center text-decoration-none">
+              <a href="{% url 'patient:rom_graph' patient_id=patient.id part='흉요추' %}" class="nav-link align-items-center text-decoration-none">
                 흉요추
               </a>
             </li>
             <br>
             <li>
-              <a href="{% url 'patient:rom_form' patient_id=patient.id part='어깨' %}" class="nav-link align-items-center text-decoration-none">
+              <a href="{% url 'patient:rom_graph' patient_id=patient.id part='어깨' %}" class="nav-link align-items-center text-decoration-none">
                 어깨
               </a>
             </li>
             <br>
             <li>
-              <a href="{% url 'patient:rom_form' patient_id=patient.id part='팔꿈치' %}" class="nav-link align-items-center text-decoration-none">
+              <a href="{% url 'patient:rom_graph' patient_id=patient.id part='팔꿈치' %}" class="nav-link align-items-center text-decoration-none">
                 팔꿈치
               </a>
             </li>
             <br>
             <li>
-              <a href="{% url 'patient:rom_form' patient_id=patient.id part='손목' %}" class="nav-link align-items-center text-decoration-none">
+              <a href="{% url 'patient:rom_graph' patient_id=patient.id part='손목' %}" class="nav-link align-items-center text-decoration-none">
                 손목
               </a>
             </li>
             <br>
             <li>
-              <a href="{% url 'patient:rom_form' patient_id=patient.id part='고관절' %}" class="nav-link align-items-center text-decoration-none">
+              <a href="{% url 'patient:rom_graph' patient_id=patient.id part='고관절' %}" class="nav-link align-items-center text-decoration-none">
                 고관절
               </a>
             </li>
             <br>
             <li>
-              <a href="{% url 'patient:rom_form' patient_id=patient.id part='무릎' %}" class="nav-link align-items-center text-decoration-none">
+              <a href="{% url 'patient:rom_graph' patient_id=patient.id part='무릎' %}" class="nav-link align-items-center text-decoration-none">
                 무릎
               </a>
             </li>
             <br>
             <li>
-              <a href="{% url 'patient:rom_form' patient_id=patient.id part='발목' %}" class="nav-link align-items-center text-decoration-none">
+              <a href="{% url 'patient:rom_graph' patient_id=patient.id part='발목' %}" class="nav-link align-items-center text-decoration-none">
                 발목
               </a>
             </li>
@@ -91,7 +91,10 @@
           </ul>
           <hr>
         </div>
-        </div>
+      </div>
+      <div class="col-md-6">
+
+      </div>
     </div>
 
 </div>
@@ -104,32 +107,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+  {% if part=='경추' or part=='흉요추' %}
     const date_data = {{date_list|safe}};
-    const set_data = {{set_list|safe}};
-    const count_data = {{count_list|safe}};
-    const weight_data = {{weight_list|safe}};
-    const time_data = {{time_list|safe}};
+    const flexion_data = {{flexions|safe}};
+    const extension_data = {{extensions|safe}};
+    const left_bending_data = {{left_bendings|safe}};
+    const right_bending_data = {{right_bendings|safe}};
+    const left_rotations = {{left_rotations|safe}};
+    const right_rotations = {{right_rotations|safe}};
     const option = {
-        scales: {
-            yAxes: [{
-                scaleLabel: {
-                  display:true,
-                  labelString: '횟수'
-                },
-                id: 'y-axis-1',
-                type: 'linear',
-                position: 'left',
-            }, {
-                scaleLabel: {
-                  display:true,
-                  labelString: '초|kg'
-                },
-                id: 'y-axis-2',
-                type: 'linear',
-                position: 'right',
-                
-            }]
-        }
+  
     }
     const line = document.getElementById('line');
    
@@ -138,33 +125,43 @@
   labels: date_data,
   datasets: [{
     type: 'line',
-    label: '세트',
-    data: set_data,
-    yAxisID: 'y-axis-1',
+    label: 'flexion',
+    data: flexion_data,
     borderColor: 'rgb(255, 99, 132)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(255, 99, 132)',
   }, {
     type: 'line',
-    label: '시간',
-    data: time_data,
-    yAxisID: 'y-axis-2',
+    label: 'extension',
+    data: extension_data,
     borderColor: 'rgb(255, 159, 64)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(255, 159, 64)',
   }, {
     type: 'line',
     label: '횟수',
-    data: count_data,
-    yAxisID: 'y-axis-1',
+    data: left_bending_data,
     borderColor: 'rgb(75, 192, 192)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(75, 192, 192)',
   }, {
     type: 'line',
     label: '무게',
-    data: weight_data,
-    yAxisID: 'y-axis-2',
+    data: right_bending_data,
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: '무게',
+    data: left_bending_data,
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: '무게',
+    data: right_rotations,
     borderColor: 'rgb(54, 162, 235)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(54, 162, 235)',
@@ -178,6 +175,7 @@
     };
     
     new Chart(line, config);
+  {% endif %}
 </script>
 </body>
 </html>
