@@ -151,6 +151,11 @@ def data1(request, patient_id):
     context = {'patient':patient,'data1_list':data1_list, 'data2_list':data2_list}
     return render(request, 'patient/data1.html', context)
 
+def data2(request, patient_id):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    context = {'patient':patient}
+    return render(request, 'patient/data2.html',context)
+
 def exercise_data(request, patient_id, part, type):
     patient = get_object_or_404(Patient2, pk=patient_id)
     part_model = get_object_or_404(Part, pk=part)
@@ -162,7 +167,7 @@ def exercise_data(request, patient_id, part, type):
 def exercise_graph(request, patient_id, part, type, exercise):
     patient = get_object_or_404(Patient2, pk=patient_id)
     exercises = Exercise.objects.filter(part=part, type=type)
-    exercise_list = ExerciseList.objects.filter(patient=patient, exercise=exercise).order_by('-date')
+    exercise_list = ExerciseList.objects.filter(patient=patient, exercise=exercise).order_by('-date')[:5]
     date_list = ['']*len(exercise_list)
     set_list = [0]*len(exercise_list)
     count_list = [0]*len(exercise_list)
@@ -174,5 +179,13 @@ def exercise_graph(request, patient_id, part, type, exercise):
         count_list[i] = exercise_list[i].count
         weight_list[i] = exercise_list[i].weight
         time_list[i] = exercise_list[i].time
-    context = {'patient':patient, 'exercise':exercise, 'set_list':set_list, 'count_list':count_list, 'weight_list':weight_list, 'time_list':time_list, 'date_list':date_list, 'exercises':exercises}
+    context = {'patient':patient, 'exercise':exercise, 'set_list':set_list[::-1], 'count_list':count_list[::-1], 'weight_list':weight_list[::-1], 'time_list':time_list[::-1], 'date_list':date_list[::-1], 'exercises':exercises}
     return render(request, 'patient/exercise_graph.html', context)
+
+def rom_graph(request, patient_id, part):
+    model_dic = {'경추':NeckTrunck, '흉요추':NeckTrunck, '어깨':ShoulderHip2, '고관절':ShoulderHip2, '팔꿈치':Elbow2, '무릎':Knee2, '손목':Wrist2, '발목':Ankle2}
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    model = model_dic[part]
+
+    context = {'patient':patient}
+    return render(request, 'patient/rom_graph', context)

@@ -1,0 +1,97 @@
+{% load static %}
+{% load patient_filter %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebars.css' %}">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+    <!-- pybo CSS -->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
+    <title>EMR</title>
+
+</head>
+<body>
+{% include 'navbar.html' %}
+<!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 Start -->
+<div class="container-fluid">
+  <div class="row">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'patient:data1' patient_id=patient.id %}"><h3>운동</h3></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'patient:data2' patient_id=patient.id %}"><h3>가동범위</h3></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><h3>물리치료</h3></a>
+      </li>
+    </ul>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+        <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+          <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-4">가동범위검사</span>
+          <hr>
+          <ul class="nav nav-pills flex-column mb-auto text-center">
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='경추' %}" class="nav-link align-items-center text-decoration-none">
+                경추
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='흉요추' %}" class="nav-link align-items-center text-decoration-none">
+                흉요추
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='어깨' %}" class="nav-link align-items-center text-decoration-none">
+                어깨
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='팔꿈치' %}" class="nav-link align-items-center text-decoration-none">
+                팔꿈치
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='손목' %}" class="nav-link align-items-center text-decoration-none">
+                손목
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='고관절' %}" class="nav-link align-items-center text-decoration-none">
+                고관절
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='무릎' %}" class="nav-link align-items-center text-decoration-none">
+                무릎
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='발목' %}" class="nav-link align-items-center text-decoration-none">
+                발목
+              </a>
+            </li>
+            <br>
+          </ul>
+          <hr>
+        </div>
+        </div>
+    </div>
+
+</div>

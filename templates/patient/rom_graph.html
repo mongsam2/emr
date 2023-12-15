@@ -1,0 +1,183 @@
+{% load static %}
+{% load patient_filter %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'sidebars.css' %}">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sidebars/">
+    <!-- pybo CSS -->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"> -->
+    <title>EMR</title>
+
+</head>
+<body>
+{% include 'navbar.html' %}
+<!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 Start -->
+<div class="container-fluid">
+  <div class="row">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'patient:data1' patient_id=patient.id %}"><h3>운동</h3></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'patient:data2' patient_id=patient.id %}"><h3>가동범위</h3></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><h3>물리치료</h3></a>
+      </li>
+    </ul>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+        <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px;">
+          <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-4">가동범위검사</span>
+          <hr>
+          <ul class="nav nav-pills flex-column mb-auto text-center">
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='경추' %}" class="nav-link align-items-center text-decoration-none">
+                경추
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='흉요추' %}" class="nav-link align-items-center text-decoration-none">
+                흉요추
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='어깨' %}" class="nav-link align-items-center text-decoration-none">
+                어깨
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='팔꿈치' %}" class="nav-link align-items-center text-decoration-none">
+                팔꿈치
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='손목' %}" class="nav-link align-items-center text-decoration-none">
+                손목
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='고관절' %}" class="nav-link align-items-center text-decoration-none">
+                고관절
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='무릎' %}" class="nav-link align-items-center text-decoration-none">
+                무릎
+              </a>
+            </li>
+            <br>
+            <li>
+              <a href="{% url 'patient:rom_form' patient_id=patient.id part='발목' %}" class="nav-link align-items-center text-decoration-none">
+                발목
+              </a>
+            </li>
+            <br>
+          </ul>
+          <hr>
+        </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="{% static 'popper.min.js' %}"></script>
+<script src="{% static 'sidebars.js' %}"></script>
+<script src="{% static 'bootstrap.min.js' %}"></script>
+<script src="{% static 'bootstrap.bundle.js' %}"></script>
+<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const date_data = {{date_list|safe}};
+    const set_data = {{set_list|safe}};
+    const count_data = {{count_list|safe}};
+    const weight_data = {{weight_list|safe}};
+    const time_data = {{time_list|safe}};
+    const option = {
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                  display:true,
+                  labelString: '횟수'
+                },
+                id: 'y-axis-1',
+                type: 'linear',
+                position: 'left',
+            }, {
+                scaleLabel: {
+                  display:true,
+                  labelString: '초|kg'
+                },
+                id: 'y-axis-2',
+                type: 'linear',
+                position: 'right',
+                
+            }]
+        }
+    }
+    const line = document.getElementById('line');
+   
+    
+    const data = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: '세트',
+    data: set_data,
+    yAxisID: 'y-axis-1',
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: '시간',
+    data: time_data,
+    yAxisID: 'y-axis-2',
+    borderColor: 'rgb(255, 159, 64)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 159, 64)',
+  }, {
+    type: 'line',
+    label: '횟수',
+    data: count_data,
+    yAxisID: 'y-axis-1',
+    borderColor: 'rgb(75, 192, 192)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(75, 192, 192)',
+  }, {
+    type: 'line',
+    label: '무게',
+    data: weight_data,
+    yAxisID: 'y-axis-2',
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+    
+    const config = {
+    type: 'line',
+    data: data,
+    options: option,
+    };
+    
+    new Chart(line, config);
+</script>
+</body>
+</html>

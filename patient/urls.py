@@ -14,7 +14,9 @@ urlpatterns = [
     path('<str:patient_id>/rom/', views.rom, name='rom'),
     path('<str:patient_id>/<str:part>/rom', views.rom_form, name='rom_form'),
     path('<str:patient_id>/data1/', views.data1, name='data1'),
+    path('<str:patient_id>/data2/', views.data2, name='data2'),
     path('<str:patient_id>/data_index/', views.data_index, name='data_index'),
     path('<str:patient_id>/<str:part>/<str:type>/exercise/data/', views.exercise_data, name='exercise_data'),
-    path('<str:patient_id>/<str:part>/<str:type>/<str:exercise>/graph', views.exercise_graph, name='exercise_graph'),
+    path('<str:patient_id>/<str:part>/<str:type>/<str:exercise>/exercise_graph', views.exercise_graph, name='exercise_graph'),
+    path('<str:patient_id>/<str:part>/rom_graph', views.rom_graph, name = 'rom_graph')
 ]
