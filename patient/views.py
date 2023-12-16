@@ -188,42 +188,103 @@ def rom_graph(request, patient_id, part):
     model = model_dic[part]
     rom_list = model.objects.filter(patient=patient, part=part).order_by('-date')[:5]
     
+    date_list = ['']*len(rom_list)
+    #flexions = [0]*len(rom_list)
+    #extensions = [0]*len(rom_list)
+    left_bendings = [0]*len(rom_list)
+    right_bendings = [0]*len(rom_list)
+    left_rotations = [0]*len(rom_list)
+    right_rotations = [0]*len(rom_list)
+
+    flexions = [[0]*len(rom_list), [0]*len(rom_list)]
+    extensions = [[0]*len(rom_list), [0]*len(rom_list)]
+    lateral_rotations = [[0]*len(rom_list), [0]*len(rom_list)]
+    medial_rotations = [[0]*len(rom_list), [0]*len(rom_list)]
+    abductions = [[0]*len(rom_list), [0]*len(rom_list)]
+    adductions = [[0]*len(rom_list), [0]*len(rom_list)]
+
+    inversions = [[0]*len(rom_list), [0]*len(rom_list)]
+    eversions = [[0]*len(rom_list), [0]*len(rom_list)]
+
+    pronations = [[0]*len(rom_list), [0]*len(rom_list)]
+    supinations = [[0]*len(rom_list), [0]*len(rom_list)]
+
+    ulnar_deviations = [[0]*len(rom_list), [0]*len(rom_list)]
+    radial_deviations = [[0]*len(rom_list), [0]*len(rom_list)]
+    context = {}
     if part=='경추' or part=='흉요추':
-        date_list = ['']*len(rom_list)
-        flexions = [0]*len(rom_list)
-        extensions = [0]*len(rom_list)
-        left_bendings = [0]*len(rom_list)
-        right_bendings = [0]*len(rom_list)
-        left_rotations = [0]*len(rom_list)
-        right_rotations = [0]*len(rom_list)
         for i in range(len(rom_list)):
-            date_list[i] = rom_list[i].date.strftime('%Y-%m-%d')
-            flexions[i] = rom_list[i].flexion
-            extensions[i] = rom_list[i].extension
-            left_bendings[i] = rom_list[i].left_bending
-            right_bendings[i] =  rom_list[i].right_bending
-            left_rotations[i] =  rom_list[i].left_rotation
-            right_rotations[i] =  rom_list[i].right_rotation
-
-        context = {'patient':patient, 'date_list':date_list[::-1], 'flexions':flexions[::-1], 'extensions':extensions[::-1], 'left_bendings':left_bendings[::-1], 'right_bendings':right_bendings[::-1], 'left_rotations':left_rotations[::-1], 'right_rotations':right_rotations[::-1]}
-        return render(request, 'patient/rom_graph.html', context)
-    
+            j = len(rom_list)-i-1
+            date_list[j] = rom_list[i].date.strftime('%Y-%m-%d')
+            flexions[0][j] = rom_list[i].flexion
+            extensions[0][j] = rom_list[i].extension
+            left_bendings[j] = rom_list[i].left_bending
+            right_bendings[j] =  rom_list[i].right_bending
+            left_rotations[j] =  rom_list[i].left_rotation
+            right_rotations[j] =  rom_list[i].right_rotation
     elif part=='어깨' or part=='고관절':
-        date_list = ['']*len(rom_list)
-        flexions = [0]*len(rom_list)
-        extensions = [0]*len(rom_list)
-        left_bendings = [0]*len(rom_list)
-        right_bendings = [0]*len(rom_list)
-        left_rotations = [0]*len(rom_list)
-        right_rotations = [0]*len(rom_list)
         for i in range(len(rom_list)):
-            date_list[i] = rom_list[i].date.strftime('%Y-%m-%d')
-            flexions[i] = rom_list[i].flexion
-            extensions[i] = rom_list[i].extension
-            left_bendings[i] = rom_list[i].left_bending
-            right_bendings[i] =  rom_list[i].right_bending
-            left_rotations[i] =  rom_list[i].left_rotation
-            right_rotations[i] =  rom_list[i].right_rotation
-
-        context = {'patient':patient, 'date_list':date_list[::-1], 'flexions':flexions[::-1], 'extensions':extensions[::-1], 'left_bendings':left_bendings[::-1], 'right_bendings':right_bendings[::-1], 'left_rotations':left_rotations[::-1], 'right_rotations':right_rotations[::-1], 'part':part}
-        return render(request, 'patient/rom_graph.html', context)
+            j = len(rom_list)-i-1
+            date_list[j] = rom_list[i].date.strftime('%Y-%m-%d')
+            flexions[0][j] = rom_list[i].flexion_L
+            flexions[1][j] = rom_list[i].flexion_R
+            extensions[0][j] = rom_list[i].extension_L
+            extensions[1][j] = rom_list[i].extension_R
+            lateral_rotations[0][j] = rom_list[i].lateral_rotation_L
+            lateral_rotations[1][j] = rom_list[i].lateral_rotation_R 
+            medial_rotations[0][j] = rom_list[i].medial_rotation_L
+            medial_rotations[1][j] = rom_list[i].medial_rotation_R 
+            abductions[0][j] = rom_list[i].abduction_L
+            abductions[1][j] = rom_list[i].abduction_R
+            adductions[0][j] = rom_list[i].adduction_L
+            adductions[1][j] = rom_list[i].adduction_R
+    elif part == '발목':
+        for i in range(len(rom_list)):
+            j = len(rom_list)-i-1
+            date_list[j] = rom_list[i].date.strftime('%Y-%m-%d')
+            flexions[0][j] = rom_list[i].flexion_L
+            flexions[1][j] = rom_list[i].flexion_R
+            extensions[0][j] = rom_list[i].extension_L
+            extensions[1][j] = rom_list[i].extension_R
+            inversions[0][j] = rom_list[i].inversion_L
+            inversions[1][j] = rom_list[i].inversion_R
+            eversions[0][j] = rom_list[i].eversion_L
+            eversions[1][j] = rom_list[i].eversion_R
+    elif part == '팔꿈치':
+        for i in range(len(rom_list)):
+            j = len(rom_list)-i-1
+            date_list[j] = rom_list[i].date.strftime('%Y-%m-%d')
+            flexions[0][j] = rom_list[i].flexion_L
+            flexions[1][j] = rom_list[i].flexion_R
+            extensions[0][j] = rom_list[i].extension_L
+            extensions[1][j] = rom_list[i].extension_R
+            pronations[0][j] = rom_list[i].pronation_L
+            pronations[1][j] = rom_list[i].pronation_R
+            supinations[0][j] = rom_list[i].supination_L
+            supinations[1][j] = rom_list[i].supination_R
+    elif part == '무릎':
+        for i in range(len(rom_list)):
+            j = len(rom_list)-i-1
+            date_list[j] = rom_list[i].date.strftime('%Y-%m-%d')
+            flexions[0][j] = rom_list[i].flexion_L
+            flexions[1][j] = rom_list[i].flexion_R
+            extensions[0][j] = rom_list[i].extension_L
+            extensions[1][j] = rom_list[i].extension_R
+    else:
+        for i in range(len(rom_list)):
+            j = len(rom_list)-i-1
+            date_list[j] = rom_list[i].date.strftime('%Y-%m-%d')
+            flexions[0][j] = rom_list[i].flexion_L
+            flexions[1][j] = rom_list[i].flexion_R
+            extensions[0][j] = rom_list[i].extension_L
+            extensions[1][j] = rom_list[i].extension_R
+            ulnar_deviations[0][j] = rom_list[i].ulnar_deviation_L
+            ulnar_deviations[1][j] = rom_list[i].ulnar_deviation_R
+            radial_deviations[0][j] = rom_list[i].radial_deviation_L
+            radial_deviations[1][j] = rom_list[i].radial_deviation_R
+    context.update({'patient':patient, 'date_list':date_list, 'flexions':flexions, 'extensions':extensions, 'left_bendings':left_bendings, 'right_bendings':right_bendings, 'left_rotations':left_rotations, 'right_rotations':right_rotations, 'part':part})
+    context.update({'flexions':flexions, 'extensions':extensions, 'lateral_rotations':lateral_rotations, 'medial_rotations':medial_rotations, 'abductions':abductions, 'adductions':adductions})
+    context.update({'inversions':inversions, 'eversions':eversions})
+    context.update({'pronations':pronations, 'supinations':supinations})
+    context.update({'ulnar_deviations':ulnar_deviations, 'radial_deviations':radial_deviations})
+    return render(request, 'patient/rom_graph.html', context)

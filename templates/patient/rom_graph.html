@@ -93,7 +93,55 @@
         </div>
       </div>
       <div class="col-md-6">
+      {% if part == '경추' or part == '흉요추' %}
+        <h4>{{part}} 가동범위</h4>
+        <br>
+        <h5>flexion, extension | Left</h5>
         <canvas id="line"></canvas>
+        <hr>
+        <h5>Right</h5>
+        <canvas id="line3"></canvas>
+      {% elif part == '어깨' or part == '고관절' %}
+        <h4>{{part}} 가동범위</h4>
+        <br>
+        <h5>Left</h5>
+        <canvas id="shoulderhipL"></canvas>
+        <hr>
+        <h5>Right</h5>
+        <canvas id="shoulderhipR"></canvas>
+      {% elif part == '발목' %}
+        <h4>{{part}} 가동범위</h4>
+        <br>
+        <h5>Left</h5>
+        <canvas id="ankleL"></canvas>
+        <hr>
+        <h5>Right</h5>
+        <canvas id="ankleR"></canvas>
+      {% elif part == '팔꿈치' %}
+        <h4>{{part}} 가동범위</h4>
+        <br>
+        <h5>Left</h5>
+        <canvas id="elbowL"></canvas>
+        <hr>
+        <h5>Right</h5>
+        <canvas id="elbowR"></canvas>
+      {% elif part == '무릎' %}
+        <h4>{{part}} 가동범위</h4>
+        <br>
+        <h5>Left</h5>
+        <canvas id="kneeL"></canvas>
+        <hr>
+        <h5>Right</h5>
+        <canvas id="kneeR"></canvas>
+      {% else %}
+        <h4>{{part}} 가동범위</h4>
+        <br>
+        <h5>Left</h5>
+        <canvas id="wristL"></canvas>
+        <hr>
+        <h5>Right</h5>
+        <canvas id="wristR"></canvas>
+      {% endif %}
       </div>
       <div class="col-md-3">
         <div class="col-md-3">
@@ -126,8 +174,25 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    const line = document.getElementById('line');
   
+    const line = document.getElementById('line');
+    const line3 = document.getElementById('line3');
+
+    const shoulderhipL = document.getElementById('shoulderhipL')
+    const shoulderhipR = document.getElementById('shoulderhipR')
+
+    const ankleL = document.getElementById('ankleL')
+    const ankleR = document.getElementById('ankleR')
+
+    const elbowL = document.getElementById('elbowL')
+    const elbowR = document.getElementById('elbowR')
+
+    const kneeL = document.getElementById('kneeL')
+    const kneeR = document.getElementById('kneeR')
+
+    const wristL = document.getElementById('wristL')
+    const wristR = document.getElementById('wristR')
+
     const date_data = {{date_list|safe}};
     const flexion_data = {{flexions|safe}};
     const extension_data = {{extensions|safe}};
@@ -135,6 +200,20 @@
     const right_bending_data = {{right_bendings|safe}};
     const left_rotation_data = {{left_rotations|safe}};
     const right_rotation_data = {{right_rotations|safe}};
+
+    const lateral_rotation_data = {{lateral_rotations|safe}};
+    const medial_rotation_data = {{medial_rotations|safe}};
+    const abduction_data = {{abductions|safe}};
+    const adduction_data = {{adductions|safe}};
+
+    const inversion_data = {{inversions|safe}};
+    const eversion_data = {{eversions|safe}};
+
+    const pronation_data = {{pronations|safe}};
+    const supination_data = {{supinations|safe}};
+
+    const ulnar_deviation_data = {{ulnar_deviations|safe}};
+    const radial_deviation_data = {{radial_deviations|safe}};
     const option = {
   
     }
@@ -146,14 +225,14 @@
   datasets: [{
     type: 'line',
     label: 'flexion',
-    data: flexion_data,
+    data: flexion_data[0],
     borderColor: 'rgb(255, 99, 132)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(255, 99, 132)',
   }, {
     type: 'line',
     label: 'extension',
-    data: extension_data,
+    data: extension_data[0],
     borderColor: 'rgb(255, 159, 64)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(255, 159, 64)',
@@ -166,22 +245,8 @@
     pointBackgroundColor: 'rgb(75, 192, 192)',
   }, {
     type: 'line',
-    label: 'right_bending',
-    data: right_bending_data,
-    borderColor: 'rgb(54, 162, 235)',
-    pointRadius: 7,
-    pointBackgroundColor: 'rgb(54, 162, 235)',
-  }, {
-    type: 'line',
     label: 'left_rotation',
     data: left_rotation_data,
-    borderColor: 'rgb(54, 162, 235)',
-    pointRadius: 7,
-    pointBackgroundColor: 'rgb(54, 162, 235)',
-  }, {
-    type: 'line',
-    label: 'right_rotation',
-    data: right_rotation_data,
     borderColor: 'rgb(54, 162, 235)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(54, 162, 235)',
@@ -193,8 +258,432 @@
     data: data,
     options: option,
     };
-    
-    new Chart(line, config);
+   
+
+    const data3 = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'right bending',
+    data: right_bending_data,
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'left bending',
+    data: right_rotation_data,
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config3 = {
+    type: 'line',
+    data: data3,
+    options: option,
+    };
+
+
+
+const data_shoulderhipL = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[0],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'lateral rotation',
+    data: lateral_rotation_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'medial rotation',
+    data: medial_rotation_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'abduction',
+    data: abduction_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'adduction',
+    data: adduction_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_shoulderhipL = {
+    type: 'line',
+    data: data_shoulderhipL,
+    options: option,
+    };
+
+const data_shoulderhipR = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[1],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'lateral rotation',
+    data: lateral_rotation_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'medial rotation',
+    data: medial_rotation_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'abduction',
+    data: abduction_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'adduction',
+    data: adduction_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_shoulderhipR = {
+    type: 'line',
+    data: data_shoulderhipR,
+    options: option,
+    };
+
+
+const data_ankleL = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[0],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'inversion',
+    data: inversion_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'eversion',
+    data: eversion_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_ankleL = {
+    type: 'line',
+    data: data_ankleL,
+    options: option,
+};
+const data_ankleR = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[1],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'inversion',
+    data: inversion_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'eversion',
+    data: eversion_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_ankleR = {
+    type: 'line',
+    data: data_ankleR,
+    options: option,
+};
+
+const data_elbowL = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[0],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'pronation',
+    data: pronation_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'supination',
+    data: supination_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_elbowL = {
+    type: 'line',
+    data: data_elbowL,
+    options: option,
+};
+const data_elbowR = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[1],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'pronation',
+    data: pronation_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'supination',
+    data: supination_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_elbowR = {
+    type: 'line',
+    data: data_elbowR,
+    options: option,
+};
+
+const data_kneeL = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[0],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_kneeL = {
+    type: 'line',
+    data: data_kneeL,
+    options: option,
+};
+const data_kneeR = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[1],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_kneeR = {
+    type: 'line',
+    data: data_kneeR,
+    options: option,
+};
+
+const data_wristL = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[0],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'ulnar deviation',
+    data: ulnar_deviation_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'radial_deviation',
+    data: radial_deviation_data[0],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_wristL = {
+    type: 'line',
+    data: data_wristL,
+    options: option,
+};
+const data_wristR = {
+  labels: date_data,
+  datasets: [{
+    type: 'line',
+    label: 'flexion',
+    data: flexion_data[1],
+    borderColor: 'rgb(255, 99, 132)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(255, 99, 132)',
+  }, {
+    type: 'line',
+    label: 'extension',
+    data: extension_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'ulnar deviation',
+    data: ulnar_deviation_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }, {
+    type: 'line',
+    label: 'radial_deviation',
+    data: radial_deviation_data[1],
+    borderColor: 'rgb(54, 162, 235)',
+    pointRadius: 7,
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+  }]
+};
+const config_wristR = {
+    type: 'line',
+    data: data_wristR,
+    options: option,
+};
+
+
+{% if part == '경추' or part == '흉요추' %}
+new Chart(line, config);
+new Chart(line3, config3);
+{% elif part == '어깨' or part == '고관절' %}
+new Chart(shoulderhipL, config_shoulderhipL);
+new Chart(shoulderhipR, config_shoulderhipR);
+{% elif part == '발목' %}
+new Chart(ankleL, config_ankleL)
+new Chart(ankleR, config_ankleR)
+{% elif part == '팔꿈치' %}
+new Chart(elbowL, config_elbowL)
+new Chart(elbowR, config_elbowR)
+{% elif part == '무릎' %}
+new Chart(kneeL, config_kneeL)
+new Chart(kneeR, config_kneeR)
+{% else %}
+new Chart(wristL, config_wristL)
+new Chart(wristR, config_wristR)
+{% endif %}
+
 </script>
 </body>
 </html>
