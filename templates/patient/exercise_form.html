@@ -97,7 +97,9 @@
         {% if field.errors %}
         <div>
           <strong>{{ field.label }}</strong>
+          {% if field.label != 'date' %}
           {{ field.errors }}
+          {% endif %}
         </div>
         {% endif %}
         {% endfor %}
@@ -115,14 +117,6 @@
             <input class="form-control" type="text" value={{patient.name}} readonly>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="input-group mb-3">
-            <span class="input-group-text">운동 날짜</span>
-            {{form.date}}
-          </div>
-      </div>
       </div>
       <br>
       <div class="row">

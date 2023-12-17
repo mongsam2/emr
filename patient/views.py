@@ -76,10 +76,11 @@ def exercise_form(request, patient_id, part, type, exercise, selected_date=''):
         form = ExerciseAddForm(request.POST)
         if form.is_valid():
             exercise_list = form.save(commit=False)
+            exercise_list.date = selected_date
             exercise_list.exercise = exercise
             exercise_list.patient = patient
             exercise_list.save()
-            return redirect('patient:exercise_add', patient_id=patient_id, part=part, type=type)
+            return redirect('patient:exercise_add', patient_id=patient_id, part=part, type=type, selected_date=selected_date)
     else:
         form = ExerciseAddForm()
 
