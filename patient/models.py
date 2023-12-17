@@ -2,6 +2,7 @@ from django.db import models
 import uuid
 from django.utils import timezone
 from .templatetags.patient_filter import back
+from datetime import date
 
 # Create your models here.
 class Patient(models.Model):
@@ -115,7 +116,7 @@ class ExerciseList(models.Model):
     code = models.CharField(primary_key=True, max_length=36, default=uuid.uuid4)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient2, on_delete=models.CASCADE)
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=date.today)
     count = models.IntegerField(default=0)
     set = models.IntegerField(default=1)
     time = models.IntegerField(default=0)

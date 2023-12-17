@@ -40,6 +40,7 @@ class ExerciseAddForm(forms.ModelForm):
     class Meta:
         model = ExerciseList
         fields = ['date', 'set', 'count', 'time', 'weight', 'done']
+        date = forms.DateField(initial=date.today())
 
 class NeckTrunkForm(forms.ModelForm):
     class Meta:

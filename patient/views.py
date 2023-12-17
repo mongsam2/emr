@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.core.paginator import Paginator
 from django.db.models import Count
+from django.utils import timezone
 
 # Create your views here.
 def index(request):
@@ -15,7 +16,8 @@ def index(request):
 
 def detail(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
-    context = {'patient':patient}
+    selected_date=str(timezone.now().date())
+    context = {'patient':patient, 'selected_date':selected_date}
     return render(request, 'patient/patient_detail.html', context)
 
 def patient_add(request):
@@ -42,25 +44,34 @@ def patient_modify(request, patient_id):
         form = PatientAddForm(instance=patient)
     context = {'form':form}
     return render(request, 'patient/patient_add.html', context)
-def exercise(request, patient_id):
+def exercise(request, patient_id, selected_date=''):
     patient = get_object_or_404(Patient2, pk=patient_id)
-    exercise_list = ExerciseList.objects.filter(patient=patient_id)
-    context = {'patient':patient, 'exercise_list':exercise_list}
+    selected_date = request.GET.get('date', selected_date)
+    if selected_date=='':
+        selected_date=str(timezone.now().date())
+    exercise_list = ExerciseList.objects.filter(patient=patient_id, date=selected_date)
+    context = {'patient':patient, 'exercise_list':exercise_list, 'selected_date':selected_date}
     return render(request, 'patient/exercise.html', context)
 
-def exercise_add(request, patient_id, part, type):
+def exercise_add(request, patient_id, part, type, selected_date=''):
     patient = get_object_or_404(Patient2, pk=patient_id)
+    selected_date = request.GET.get('date', selected_date)
+    if selected_date=='':
+        selected_date=str(timezone.now().date())
     part = get_object_or_404(Part, pk=part)
     type = get_object_or_404(ExerciseType, pk=type)
     exercises = Exercise.objects.filter(part=part, type=type)
-    exercise_list = ExerciseList.objects.filter(patient=patient_id)
-    context = {'patient':patient, 'part':part, 'type':type, 'exercises':exercises, 'exercise_list':exercise_list}
+    exercise_list = ExerciseList.objects.filter(patient=patient_id, date=selected_date)
+    context = {'patient':patient, 'part':part, 'type':type, 'exercises':exercises, 'exercise_list':exercise_list, 'selected_date':selected_date}
     return render(request, 'patient/exercise_add.html', context)
 
-def exercise_form(request, patient_id, part, type, exercise):
+def exercise_form(request, patient_id, part, type, exercise, selected_date=''):
     patient = get_object_or_404(Patient2, pk = patient_id)
+    selected_date = request.GET.get('date', selected_date)
+    if selected_date=='':
+        selected_date=str(timezone.now().date())
     exercise = get_object_or_404(Exercise, pk=exercise)
-    exercise_list = ExerciseList.objects.filter(patient=patient_id)
+    exercise_list = ExerciseList.objects.filter(patient=patient_id, date=selected_date)
     if request.method == 'POST':
         form = ExerciseAddForm(request.POST)
         if form.is_valid():
@@ -72,7 +83,27 @@ def exercise_form(request, patient_id, part, type, exercise):
     else:
         form = ExerciseAddForm()
 
-    context={'patient':patient, 'exercise':exercise, 'form':form, 'exercise_list':exercise_list}
+    context={'patient':patient, 'exercise':exercise, 'form':form, 'exercise_list':exercise_list, 'selected_date':selected_date}
+    return render(request, 'patient/exercise_form.html', context)
+
+def exercise_modify(request, exercise_code, patient_id, selected_date=''):
+    exercise_ins = get_object_or_404(ExerciseList, pk=exercise_code)
+
+    exercise = get_object_or_404(Exercise, pk=exercise_ins.exercise.name)
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    selected_date = request.GET.get('date', selected_date)
+    if selected_date=='':
+        selected_date=str(timezone.now().date())
+    exercise_list = ExerciseList.objects.filter(patient=patient_id, date=selected_date)
+    if request.method == 'POST':
+        form = ExerciseAddForm(request.POST, instance=exercise_ins)
+        if form.is_valid():
+            exercise = form.save(commit=False)
+            exercise.save()
+            return redirect('patient:exercise', patient_id = exercise.patient.id, selected_date=selected_date)
+    else:
+        form = ExerciseAddForm(instance=exercise_ins)
+    context = {'patient':patient, 'exercise':exercise, 'form':form, 'exercise_list':exercise_list, 'selected_date':selected_date}
     return render(request, 'patient/exercise_form.html', context)
 
 def rom(request, patient_id):

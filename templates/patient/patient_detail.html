@@ -34,7 +34,7 @@
           <div class="col-md-4">
             <div class="card bg-info mb-3 mt-3 ml-3" style="max-width: 18rem;">
               <div class="card-header">운동처방</div>
-              <a href="{% url 'patient:exercise' patient.id %}"><img src="{% static '운동치료.jpg' %}" class="card-img-top"></a>
+              <a href="{% url 'patient:exercise' patient_id=patient.id selected_date=selected_date %}"><img src="{% static '운동치료.jpg' %}" class="card-img-top"></a>
             </div>
           </div>
       
