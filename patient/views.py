@@ -167,18 +167,14 @@ def data_index(request, patient_id):
 def data1(request, patient_id):
     patient = get_object_or_404(Patient2, pk=patient_id)
     exercise_list = ExerciseList.objects.filter(patient=patient)
-    
-    part_group = exercise_list.values('exercise__part').annotate(part_count=Count('code'))
-    data1 = [item['part_count'] for item in part_group]
     data1_list = [0]*6
-    for i in range(len(data1)):
-        data1_list[i] = data1[i]
-
-    type_group = exercise_list.values('exercise__type').annotate(type_count=Count('code'))
-    data1 = [item['type_count'] for item in type_group]
+    part_list = ['목-허리', '가슴-어깨', '등-견갑대', '상완-전완', '대퇴사두-햄스트링', '둔근-종아리']
+    for i in range(6):
+        data1_list[i] = exercise_list.filter(exercise__part=part_list[i]).count()
     data2_list = [0]*4
-    for i in range(len(data1)):
-        data2_list[i] = data1[i]
+    type_list = ['스트레칭', '가동성 운동', '소도구', '근력 운동']
+    for i in range(4):
+        data2_list[i] = exercise_list.filter(exercise__type=type_list[i]).count()
 
     context = {'patient':patient,'data1_list':data1_list, 'data2_list':data2_list}
     return render(request, 'patient/data1.html', context)
@@ -206,12 +202,13 @@ def exercise_graph(request, patient_id, part, type, exercise):
     weight_list = [0]*len(exercise_list)
     time_list = [0]*len(exercise_list)
     for i in range(len(exercise_list)):
-        date_list[i] = exercise_list[i].date.strftime("%Y-%m-%d")
-        set_list[i] = exercise_list[i].set
-        count_list[i] = exercise_list[i].count
-        weight_list[i] = exercise_list[i].weight
-        time_list[i] = exercise_list[i].time
-    context = {'patient':patient, 'exercise':exercise, 'set_list':set_list[::-1], 'count_list':count_list[::-1], 'weight_list':weight_list[::-1], 'time_list':time_list[::-1], 'date_list':date_list[::-1], 'exercises':exercises}
+        j = len(exercise_list)-1-i
+        date_list[j] = exercise_list[i].date.strftime("%Y-%m-%d")
+        set_list[j] = exercise_list[i].set
+        count_list[j] = exercise_list[i].count
+        weight_list[j] = exercise_list[i].weight
+        time_list[j] = exercise_list[i].time
+    context = {'patient':patient, 'exercise':exercise, 'set_list':set_list, 'count_list':count_list, 'weight_list':weight_list, 'time_list':time_list, 'date_list':date_list, 'exercises':exercises}
     return render(request, 'patient/exercise_graph.html', context)
 
 def rom_graph(request, patient_id, part):

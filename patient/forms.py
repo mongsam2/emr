@@ -36,6 +36,7 @@ class PatientAddForm(forms.ModelForm):
             'memo':'환자메모'
         }
 
+
 class ExerciseAddForm(forms.ModelForm):
     class Meta:
         model = ExerciseList

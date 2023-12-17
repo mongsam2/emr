@@ -188,7 +188,7 @@
             yAxes: [{
                 scaleLabel: {
                   display:true,
-                  labelString: '횟수'
+                  labelString: '세트'
                 },
                 id: 'y-axis-1',
                 type: 'linear',
@@ -196,7 +196,7 @@
             }, {
                 scaleLabel: {
                   display:true,
-                  labelString: '초|kg'
+                  labelString: '초, kg, 횟수'
                 },
                 id: 'y-axis-2',
                 type: 'linear',
@@ -211,11 +211,11 @@
     const data = {
   labels: date_data,
   datasets: [{
-    type: 'line',
+    type: 'bar',
     label: '세트',
     data: set_data,
+    backgroundColor: 'rgba(174, 198, 207, 0.3)',
     yAxisID: 'y-axis-1',
-    borderColor: 'rgb(255, 99, 132)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(255, 99, 132)',
   }, {
@@ -230,7 +230,7 @@
     type: 'line',
     label: '횟수',
     data: count_data,
-    yAxisID: 'y-axis-1',
+    yAxisID: 'y-axis-2',
     borderColor: 'rgb(75, 192, 192)',
     pointRadius: 7,
     pointBackgroundColor: 'rgb(75, 192, 192)',
