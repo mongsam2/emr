@@ -20,6 +20,19 @@ def detail(request, patient_id):
     context = {'patient':patient, 'selected_date':selected_date}
     return render(request, 'patient/patient_detail.html', context)
 
+def memo(request, patient_id):
+    patient = get_object_or_404(Patient2, pk=patient_id)
+    if request.method == 'POST':
+        form = MemoAddForm(request.POST, instance=patient)
+        if form.is_valid():
+            patient = form.save(commit=False)
+            patient.save()
+            return redirect('patient:detail', patient_id=patient.id)
+    else:
+        form = MemoAddForm(instance=patient)
+    context = {'form':form, 'patient':patient}
+    return render(request, 'patient/memo.html', context)
+
 def patient_add(request):
     if request.method =='POST': # 저장하기 버튼을 눌렀을 경우
         form = PatientAddForm(request.POST) # 입력정보가 저장되어있는 폼

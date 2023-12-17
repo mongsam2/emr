@@ -36,6 +36,11 @@ class PatientAddForm(forms.ModelForm):
             'memo':'환자메모'
         }
 
+class MemoAddForm(forms.ModelForm):
+    class Meta:
+        model = Patient2
+        fields = ['exercise_memo', 'rom_memo', 'clinic_memo']
+
 
 class ExerciseAddForm(forms.ModelForm):
     class Meta:

@@ -3,6 +3,7 @@ import uuid
 from django.utils import timezone
 from .templatetags.patient_filter import back
 from datetime import date
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Patient(models.Model):
@@ -20,10 +21,10 @@ class Patient2(models.Model):
     front_resident = models.CharField(max_length=6)
     back_resident = models.CharField(max_length=1)
     phone = models.CharField(max_length=30)
-    memo = models.TextField(default='메모')
-    exercise_memo = models.TextField(default='운동처방 메모')
-    rom_memo = models.TextField(default='가동범위 검사 메모')
-    clinic_memo = models.TextField(default='물리치료 메모')
+    memo = models.TextField(default='메모', null=True, blank=True)
+    exercise_memo = models.TextField(default='운동처방 메모', null=True, blank=True)
+    rom_memo = models.TextField(default='가동범위 검사 메모', null=True, blank=True)
+    clinic_memo = models.TextField(default='물리치료 메모', null=True, blank=True)
 
     def __str__(self):
         return self.name + ' ' + self.front_resident +' ' + back(self.back_resident) + ' ' + self.id[:2]
@@ -125,6 +126,7 @@ class ExerciseList(models.Model):
     time = models.IntegerField(default=0)
     weight = models.IntegerField(default=0)
     done = models.BooleanField(default=False)
+    memo = models.TextField(default='메모', null=True, blank=True)
 
 #------------------------------------------------------------------------------------------
 

@@ -1,10 +1,14 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from common.forms import UserForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
-    return render(request, 'common/home.html')
+    current_user = request.user
+    username = current_user.username
+    context = {'username':username}
+    return render(request, 'common/home.html', context)
 
 def start(request):
     return render(request, 'common/start.html')
