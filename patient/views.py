@@ -183,11 +183,11 @@ def data1(request, patient_id):
     data1_list = [0]*6
     part_list = ['목-허리', '가슴-어깨', '등-견갑대', '상완-전완', '대퇴사두-햄스트링', '둔근-종아리']
     for i in range(6):
-        data1_list[i] = exercise_list.filter(exercise__part=part_list[i]).count()
+        data1_list[i] = exercise_list.filter(exercise__part=part_list[i], done=True).count()
     data2_list = [0]*4
     type_list = ['스트레칭', '가동성 운동', '소도구', '근력 운동']
     for i in range(4):
-        data2_list[i] = exercise_list.filter(exercise__type=type_list[i]).count()
+        data2_list[i] = exercise_list.filter(exercise__type=type_list[i], done=True).count()
 
     context = {'patient':patient,'data1_list':data1_list, 'data2_list':data2_list}
     return render(request, 'patient/data1.html', context)
@@ -208,7 +208,7 @@ def exercise_data(request, patient_id, part, type):
 def exercise_graph(request, patient_id, part, type, exercise):
     patient = get_object_or_404(Patient2, pk=patient_id)
     exercises = Exercise.objects.filter(part=part, type=type)
-    exercise_list = ExerciseList.objects.filter(patient=patient, exercise=exercise).order_by('-date')[:5]
+    exercise_list = ExerciseList.objects.filter(patient=patient, exercise=exercise, done=True).order_by('-date')[:5]
     date_list = ['']*len(exercise_list)
     set_list = [0]*len(exercise_list)
     count_list = [0]*len(exercise_list)
