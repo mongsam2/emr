@@ -8,7 +8,12 @@ from django.utils import timezone
 # Create your views here.
 def index(request):
     page = request.GET.get('page', 1)
+    name = request.GET.get('name', '')
     patient_list = Patient2.objects.order_by('id')
+    if name=='':
+        patient_list = Patient2.objects.order_by('id')
+    else:
+        patient_list = Patient2.objects.filter(name=name)
     paginator = Paginator(patient_list, 10)
     page_obj = paginator.get_page(page)
     context = {'patient_list':page_obj}

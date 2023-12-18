@@ -4,25 +4,41 @@
     <h5 class="my-3 border-bottom pb-2">환자정보입력</h5>
     <form method="post">
         {% csrf_token %}
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">환자이름</span>
-            <input type="text" class="form-control" placeholder="Username" aria-label="환자이름" aria-describedby="basic-addon1" value="{{form.name.value}}" name="name">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">환자이름</span>
+                    <input type="text" class="form-control" placeholder="환자이름" aria-label="환자이름" aria-describedby="basic-addon1" name="name" value="{{ form.name.value|default:'' }}">
+                </div>
+            </div>
         </div>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="주민번호 앞자리" aria-label="Username", value="{{form.front_resident.value}}" name="front_resident">
-            <span class="input-group-text">-</span>
-            <input type="text" class="form-control" placeholder="1" aria-label="Server" value="{{form.back_resident.value}}" name="back_resident">
-            <span class="input-group-text">******</span>
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon7">전화번호</span>
-            <input type="text" class="form-control" placeholder="010-1111-2222" aria-label="환자이름" aria-describedby="basic-addon7" value="{{form.phone.value}}" name="phone">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="주민번호 앞자리" aria-label="Username" name="front_resident" maxlength="6" value="{{ form.front_resident.value|default:'' }}">
+                    <span class="input-group-text">-</span>
+                    <input type="text" class="form-control" placeholder="주민번호 뒷자리" aria-label="Server" name="back_resident" maxlength="1" value="{{ form.back_resident.value|default:'' }}">
+                </div>
+            </div>
         </div>
-        <div class="input-group">
-            <span class="input-group-text">증상</span>
-            <textarea class="form-control" aria-label="With textarea" name="memo">{{form.memo.value}}</textarea>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon7">전화번호</span>
+                    <input type="text" class="form-control" placeholder="010-1111-2222" aria-label="환자이름" aria-describedby="basic-addon7" name="phone" value="{{ form.phone.value|default:'' }}" maxlength="13">
+                </div>
+            </div>
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <span class="input-group-text">증상</span>
+                    <textarea class="form-control" aria-label="With textarea" name="memo" rows="6">{{ form.memo.value|default:'' }}</textarea>
+                </div>
+            </div>
+        </div>
+        <br>
         <button type="submit" class="btn btn-primary">저장</button>
     </form>
 </div>
-{% endblock %}
+{% endblock %}>

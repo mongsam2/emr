@@ -11,12 +11,14 @@
         <br>
         <form method="post">
           {% csrf_token %}
-          <label for="exercise_memo" class="form-label">운동처방 전달사항</label>
-          <textarea class="form-control" id="exercise_memo" rows="7" name="exercise_memo">{{ form.instance.exercise_memo }}</textarea>
-          <label for="rom_memo" class="form-label">가동범위검사 전달사항</label>
-          <textarea class="form-control" id="rom_memo" rows="7" name="rom_memo">{{ form.instance.rom_memo }}</textarea>
-          <label for="clinic_memo" class="form-label">물리치료 전달사항</label>
-          <textarea class="form-control" id="clinic_memo" rows="7" name="clinic_memo">{{ form.instance.clinic_memo }}</textarea>
+          <label for="exercise_memo" class="form-label">운동처방</label>
+          <textarea class="form-control" id="exercise_memo" rows="6" name="exercise_memo">{{ form.instance.exercise_memo }}</textarea>
+          <br>
+          <label for="rom_memo" class="form-label">가동범위검사</label>
+          <textarea class="form-control" id="rom_memo" rows="6" name="rom_memo">{{ form.instance.rom_memo }}</textarea>
+          <br>
+          <label for="clinic_memo" class="form-label">물리치료</label>
+          <textarea class="form-control" id="clinic_memo" rows="6" name="clinic_memo">{{ form.instance.clinic_memo }}</textarea>
           <br>
           <button type="submit" class="btn btn-primary btn-lg">확인</button>
         </form>

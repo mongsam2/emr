@@ -95,7 +95,7 @@
           <div class="card mb-3 mt-3 ml-3" style="max-width: 18rem;">
             <div class="card-header">{{exercise.name}}</div>
             <div class="card-body">
-              <img src="{% static '운동치료.jpg' %}" class="card-img-top">
+              <img src="{% static exercise.name|add:'.png' %}" class="card-img-top" style="width: 210px; height: 150px;">
               <a class="btn btn-primary" href="{% url 'patient:exercise_form' patient_id=patient.id part=exercise.part.part type=exercise.type.type exercise=exercise.name selected_date=selected_date %}" role="button">
                 리스트에 추가
               </a>
