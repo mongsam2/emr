@@ -1,46 +1,60 @@
 # 2023 데이터베이스 ic-pbl
+<br/>
 
 ## 시나리오
 
 마취통증의학 및 재활의학과에서는 일반적인 병원 진료와 다르게 다양한 검사와 치료가 수행되고 있음
-병원에서는 환자의 진료 기록을 EMR(Electronic Medical Record) 시스템을 통해서 기록하는데, 
+병원에서는 환자의 진료 기록을 EMR(Electronic Medical Record) 시스템을 통해서 기록하는데, 기존의 시스템은 환자 증상, 질병, 약 처방과 같은 정보만 기록할 수 있어서 해당 과에서 기록 할 수 있는 정보가 한정적인 문제가 있음    
 
-기존의 시스템은 환자 증상, 질병, 약 처방과 같은 정보만 기록할 수 있어서 해당 과에서 기록 할 수 있는 정보가 한정적인 문제가 있음
+<br/>
 
 ## 문제 정의
 
 1. 기존의 EMR은 환자의 정보를 어떻게 기록할까?
 2. 재활의학과에서 실시하는 검사에는 어떤 것들이 있을까?
 3. 재활의학과에서는 환자의 기능 개선을 위해 운동을 처방을 내리는데 어떻게 기록할 것인가?
+   
+<br/>
 
 ## 자료조사
 
-### 기존 EMR의 화면 구성
+### 1. 기존 EMR의 화면 구성
 
 (닥터팔레트)
 
-![cea5328a51d77.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/ce3c37fe-0b37-4542-a3f2-0c218b221aa2/1e76be75-da5e-47f9-9de7-0e9b5698ee14/cea5328a51d77.png)
+<img src="screenshots/닥터팔레트.png" width="800px" height="500px">
+<br/>
 
-### 재활의학과에서 실시하는 기능평가들
+
+### 2. 재활의학과에서 실시하는 기능평가들
 
 ROM: 관절가동범위평가
 
 MMT: 도수근력평가
 
-![SE-ee59bf22-a13c-40bc-b527-3fa82dc9c86e.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/ce3c37fe-0b37-4542-a3f2-0c218b221aa2/e438195f-d916-408c-8a21-afc70e4feea5/SE-ee59bf22-a13c-40bc-b527-3fa82dc9c86e.png)
+<img src="screenshots/ROM-MMT.png" width="700px" height="500px">    
+<br/>
 
-### 많은 운동들을 분류하는 기준
+### 3. 많은 운동들을 분류하는 기준
 
 가슴, 어깨, 등, 종아리 등, 부위별로 분류
 
 스트레칭, 가동성 운동, 소도구 운동, 근력 운동으로 분류
+<br/>
+
+## 사용한 라이브러리, 프레임워크
+### 백엔드
+<img src="screenshots/django.png" width="300px" height="180px">    
+
+### 프론트
+<img src="screenshots/bootstrap.png" width="300px" height="180px"><img src="screenshots/chartjs.png" width="300px" height="180px">
+
+### 배포(현재는 종료)
+<img src="screenshots/aws.png" width="300px" height="180px">    
+<br/>
 
 
-
-
-
-# 재활의학과 EMR 웹사이트
-### 2023-2학기 데이터베이스 ic-pbl 프로젝트      
+## 구현한 기능들     
 <br>
 <h3>시작 페이지</h3>
 <img src="screenshots/index.png" width="800px" height="500px">
